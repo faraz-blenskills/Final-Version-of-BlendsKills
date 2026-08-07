@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "../components/site/SiteNav";
 import { SiteFooter } from "../components/site/SiteFooter";
 import { SmoothScroll } from "../components/site/SmoothScroll";
-import { CustomCursor } from "../components/site/CustomCursor";
 
 function NotFoundComponent() {
   return (
@@ -136,7 +135,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CustomCursor />
       <SiteNav />
       <SmoothScroll>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}

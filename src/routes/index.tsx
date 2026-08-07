@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Reveal } from "../components/site/Reveal";
 import { CountUp } from "../components/site/CountUp";
 import { ArcImageCarousel, type ArcCarouselItem } from "../components/site/ArcImageCarousel";
+import { LogoRail, type LogoRailItem } from "../components/site/LogoRail";
 import heroMotion from "../assets/hero-motion.mp4";
 import howWeExecuteMotion from "../assets/how-we-execute-motion.mp4";
 import adypuCommunity from "../assets/portfolio/adypu-community.png";
@@ -18,8 +19,19 @@ import toyworldHotwheels from "../assets/portfolio/toyworld-hotwheels.png";
 import diamondWaterPark from "../assets/portfolio/diamond-water-park.png";
 import imagicaaLogo from "../assets/portfolio/imagicaa.png";
 import digiGrowHub from "../assets/portfolio/digi-grow-hub.png";
-import googleAdsLogo from "../assets/trusted/google-ads.svg";
-import metaLogo from "../assets/trusted/meta.svg";
+import canvaLogo from "../assets/logo-rail/canva.png";
+import reactLogo from "../assets/logo-rail/react.png";
+import nodejsLogo from "../assets/logo-rail/nodejs.png";
+import wordpressLogo from "../assets/logo-rail/wordpress.png";
+import hubspotLogo from "../assets/logo-rail/hubspot.png";
+import hostingerLogo from "../assets/logo-rail/hostinger.png";
+import googleAdsLogo from "../assets/logo-rail/google-ads.png";
+import zapierLogo from "../assets/logo-rail/zapier.png";
+import cloudflareLogo from "../assets/logo-rail/cloudflare.png";
+import openaiLogo from "../assets/logo-rail/openai.png";
+import claudeLogo from "../assets/logo-rail/claude.png";
+import googleAnalyticsLogo from "../assets/logo-rail/google-analytics.png";
+import metaLogo from "../assets/logo-rail/meta.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,8 +125,22 @@ const testimonials = [
   },
 ];
 
-const trustedLogos = [
+const logoRailRowA: LogoRailItem[] = [
+  { name: "Canva", logo: canvaLogo },
+  { name: "React", logo: reactLogo },
+  { name: "Node.js", logo: nodejsLogo },
+  { name: "WordPress", logo: wordpressLogo },
+  { name: "HubSpot", logo: hubspotLogo },
+  { name: "Hostinger", logo: hostingerLogo },
   { name: "Google Ads", logo: googleAdsLogo },
+];
+
+const logoRailRowB: LogoRailItem[] = [
+  { name: "Zapier", logo: zapierLogo },
+  { name: "Cloudflare", logo: cloudflareLogo },
+  { name: "OpenAI", logo: openaiLogo },
+  { name: "Claude", logo: claudeLogo },
+  { name: "Google Analytics", logo: googleAnalyticsLogo },
   { name: "Meta", logo: metaLogo },
 ];
 
@@ -397,24 +423,14 @@ function Index() {
 
       {/* ---------------- TRUSTED BY ---------------- */}
       <section className="bg-paper text-paper-foreground">
-        <div className="mx-auto max-w-[1400px] px-5 py-20 text-center sm:px-8">
+        <div className="mx-auto max-w-[1400px] px-5 pt-20 text-center sm:px-8">
           <Reveal>
-            <p className="display-lg text-paper-foreground">Trusted By</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="no-scrollbar mt-10 flex flex-nowrap items-center justify-center gap-x-8 overflow-x-auto px-4 sm:gap-x-12 md:gap-x-16">
-              {trustedLogos.map((t) => (
-                <img
-                  key={t.name}
-                  src={t.logo}
-                  alt={t.name}
-                  loading="lazy"
-                  className="h-7 w-auto shrink-0 opacity-80 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:h-10 md:h-12"
-                />
-              ))}
-            </div>
+            <p className="display-lg text-paper-foreground">Powered by Advance Technologies</p>
           </Reveal>
         </div>
+        <Reveal delay={0.1} className="mt-10 pb-20">
+          <LogoRail rowA={logoRailRowA} rowB={logoRailRowB} />
+        </Reveal>
       </section>
 
       {/* ---------------- FINAL CTA ---------------- */}
@@ -439,7 +455,7 @@ function Index() {
               href="https://wa.me/919175789966?text=Hi%20BlendSkills!%20I%27m%20interested%20in%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-hover-target group inline-flex items-center gap-3 rounded-full bg-background px-8 py-4 text-lg font-medium text-foreground transition-opacity hover:opacity-88"
+              className="glass-pill cursor-hover-target group inline-flex items-center gap-3 rounded-full px-8 py-4 text-lg font-medium text-foreground transition-opacity hover:opacity-88"
             >
               Get a Free Strategy Call
               <ArrowUpRight className="size-5 text-accent transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

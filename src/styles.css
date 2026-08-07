@@ -224,11 +224,39 @@
 }
 
 @utility glass-pill {
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(20, 20, 19, 0.08);
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.42) 55%,
+    rgba(255, 255, 255, 0.58) 100%
+  );
+  backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   color: var(--color-foreground);
-  box-shadow: var(--shadow-nav);
+  box-shadow:
+    var(--shadow-nav),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -6px 14px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 1px rgba(20, 20, 19, 0.06);
+}
+
+@utility glass-dark {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 19, 0.92) 0%,
+    rgba(20, 20, 19, 0.74) 55%,
+    rgba(20, 20, 19, 0.88) 100%
+  );
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--color-primary-foreground);
+  box-shadow:
+    var(--shadow-nav),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -6px 14px rgba(255, 255, 255, 0.05),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.4);
 }
 
 @utility btn-primary {
@@ -236,21 +264,33 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background-color: var(--color-primary);
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 19, 0.92) 0%,
+    rgba(20, 20, 19, 0.74) 55%,
+    rgba(20, 20, 19, 0.88) 100%
+  );
+  backdrop-filter: blur(18px) saturate(160%);
   color: var(--color-primary-foreground);
-  border: 1.5px solid var(--color-primary);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-btn);
   padding: 0.75rem 1.75rem;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.02em;
+  box-shadow:
+    var(--shadow-nav),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -6px 14px rgba(255, 255, 255, 0.05),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.4);
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.3s ease;
 
   &:hover {
-    opacity: 0.88;
+    opacity: 0.9;
   }
 
   &:active {
@@ -263,20 +303,36 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background-color: var(--color-secondary);
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.45) 55%,
+    rgba(255, 255, 255, 0.62) 100%
+  );
+  backdrop-filter: blur(18px) saturate(160%);
   color: var(--color-secondary-foreground);
-  border: 1.5px solid var(--color-foreground);
+  border: 1.5px solid rgba(20, 20, 19, 0.35);
   border-radius: var(--radius-btn);
   padding: 0.75rem 1.75rem;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 450;
+  box-shadow:
+    var(--shadow-nav),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -6px 14px rgba(255, 255, 255, 0.2);
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.3s ease;
+    background 0.3s ease;
 
   &:hover {
-    background-color: var(--color-muted);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.6) 55%,
+      rgba(255, 255, 255, 0.78) 100%
+    );
   }
 
   &:active {
@@ -362,6 +418,24 @@
   }
 }
 
+@keyframes logo-rail-a {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes logo-rail-b {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @utility animate-marquee {
   animation: marquee-x 32s linear infinite;
 }
@@ -399,64 +473,4 @@
 
 @utility animate-scroll-cue {
   animation: scroll-cue 2s ease-in-out infinite;
-}
-
-/* ---------- custom cursor ---------- */
-
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 90;
-  will-change: transform;
-}
-
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background-color: var(--color-accent);
-}
-
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  transition:
-    width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.25s ease,
-    background-color 0.25s ease;
-}
-
-.cursor-ring.cursor-hover {
-  width: 68px;
-  height: 68px;
-  border-color: var(--color-accent);
-  background-color: rgba(243, 115, 56, 0.12);
-}
-
-.cursor-ring.cursor-dark {
-  border-color: rgba(20, 20, 19, 0.35);
-}
-
-.cursor-ring.cursor-dark.cursor-hover {
-  border-color: var(--color-accent);
-}
-
-body.has-custom-cursor,
-body.has-custom-cursor a,
-body.has-custom-cursor button,
-body.has-custom-cursor [role="button"] {
-  cursor: none;
-}
-
-@media (pointer: coarse) {
-  .cursor-dot,
-  .cursor-ring {
-    display: none;
-  }
 }

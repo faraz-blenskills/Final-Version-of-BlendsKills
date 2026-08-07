@@ -18,11 +18,10 @@ export function SiteNav() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 pt-6 sm:px-8">
         <Link
           to="/"
-          className="glass-pill pointer-events-auto flex items-center gap-2.5 rounded-full py-2.5 pl-4 pr-5 font-display text-lg font-medium tracking-tight"
+          aria-label="BlendSkills — Home"
+          className="glass-pill pointer-events-auto flex items-center rounded-full p-3"
         >
-          <img src={logoMark} alt="" className="h-7 w-auto" />
-          BLENDSKILLS
-          <sup className="ml-0.5 text-[0.6em] text-accent">®</sup>
+          <img src={logoMark} alt="BlendSkills" className="h-11 w-auto brightness-0" />
         </Link>
 
         <nav className="glass-pill pointer-events-auto hidden items-center gap-1 rounded-full p-1.5 md:flex">
@@ -41,7 +40,7 @@ export function SiteNav() {
             href="https://wa.me/919175789966?text=Hi%20BlendSkills!%20I%27d%20like%20to%20discuss%20my%20project."
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-1 rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-85"
+            className="glass-dark ml-1 rounded-full px-5 py-2 text-sm font-medium transition-opacity hover:opacity-85"
           >
             Get started
           </a>
@@ -71,7 +70,7 @@ export function SiteNav() {
           ))}
           <a
             href="https://wa.me/919175789966"
-            className="mt-1 block rounded-[16px] bg-primary px-4 py-3 text-base font-medium text-primary-foreground"
+            className="glass-dark mt-1 block rounded-[16px] px-4 py-3 text-base font-medium"
           >
             Get started
           </a>
