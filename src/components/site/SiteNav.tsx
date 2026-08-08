@@ -6,6 +6,7 @@ import logoMark from "../../assets/logo-mark.png";
 
 const links = [
   { to: "/", label: "Home" },
+  { to: "/about-us", label: "About Us" },
   { to: "/services", label: "Services" },
   { to: "/contact-us", label: "Contact Us" },
 ] as const;
