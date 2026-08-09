@@ -212,11 +212,11 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
       {openItem && (
         <div
           onClick={() => setOpenIndex(null)}
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/60 p-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/60 p-3 backdrop-blur-sm sm:p-5"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative grid max-h-[88vh] w-full max-w-5xl grid-cols-1 gap-8 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:grid-cols-2 sm:items-stretch sm:gap-10 sm:p-14"
+            className="relative grid max-h-[94vh] w-full grid-cols-1 gap-8 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:grid-cols-2 sm:items-stretch sm:gap-10 sm:p-14"
           >
             <button
               type="button"
