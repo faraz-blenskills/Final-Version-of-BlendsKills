@@ -216,21 +216,23 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative flex w-full max-w-lg flex-col gap-6 rounded-[32px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:p-12"
+            className="relative flex max-h-[88vh] w-full max-w-3xl flex-col gap-7 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:p-14"
           >
             <button
               type="button"
               aria-label="Close"
               onClick={() => setOpenIndex(null)}
-              className="cursor-hover-target absolute right-5 top-5 flex size-10 items-center justify-center rounded-full border border-foreground/15 transition-colors hover:bg-muted"
+              className="cursor-hover-target absolute right-5 top-5 z-10 flex size-11 items-center justify-center rounded-full border border-foreground/15 bg-surface transition-colors hover:bg-muted"
             >
               <X className="size-4" />
             </button>
-            <div className="size-20 overflow-hidden rounded-2xl">
+            <div className="h-56 w-full shrink-0 overflow-hidden rounded-[28px] sm:h-72">
               <img src={openItem.img} alt={openItem.title} className="size-full object-cover" />
             </div>
-            <h3 className="display-lg max-w-md">{openItem.title}</h3>
-            <p className="text-base leading-relaxed text-muted-foreground">{openItem.desc}</p>
+            <h3 className="display-xl max-w-xl">{openItem.title}</h3>
+            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+              {openItem.desc}
+            </p>
             <a
               href={whatsappLink(openItem.title)}
               target="_blank"
