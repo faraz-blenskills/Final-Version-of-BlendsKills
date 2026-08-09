@@ -60,6 +60,15 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
     return () => ro.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (openIndex === null) return;
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+    };
+  }, [openIndex]);
+
   const goTo = (i: number) => setActiveIndex(((i % N) + N) % N);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
