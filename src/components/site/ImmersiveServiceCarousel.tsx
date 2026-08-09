@@ -216,7 +216,7 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative flex max-h-[88vh] w-full max-w-3xl flex-col gap-7 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:p-14"
+            className="relative grid max-h-[88vh] w-full max-w-5xl grid-cols-1 gap-8 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:grid-cols-2 sm:items-stretch sm:gap-10 sm:p-14"
           >
             <button
               type="button"
@@ -226,22 +226,22 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
             >
               <X className="size-4" />
             </button>
-            <div className="h-56 w-full shrink-0 overflow-hidden rounded-[28px] sm:h-72">
+            <div className="h-56 w-full shrink-0 overflow-hidden rounded-[28px] sm:h-full sm:min-h-[22rem]">
               <img src={openItem.img} alt={openItem.title} className="size-full object-cover" />
             </div>
-            <h3 className="display-xl max-w-xl">{openItem.title}</h3>
-            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              {openItem.desc}
-            </p>
-            <a
-              href={whatsappLink(openItem.title)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary self-start"
-            >
-              Get a Free Consultation
-              <ArrowUpRight className="size-4" />
-            </a>
+            <div className="flex flex-col justify-center gap-5">
+              <h3 className="display-xl">{openItem.title}</h3>
+              <p className="text-lg leading-relaxed text-muted-foreground">{openItem.desc}</p>
+              <a
+                href={whatsappLink(openItem.title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary self-start"
+              >
+                Get a Free Consultation
+                <ArrowUpRight className="size-4" />
+              </a>
+            </div>
           </div>
         </div>
       )}
