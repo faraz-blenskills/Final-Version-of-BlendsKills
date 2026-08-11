@@ -32,6 +32,8 @@ import openaiLogo from "../assets/logo-rail/openai.png";
 import claudeLogo from "../assets/logo-rail/claude.png";
 import googleAnalyticsLogo from "../assets/logo-rail/google-analytics.png";
 import metaLogo from "../assets/logo-rail/meta.png";
+import msmeLogo from "../assets/certifications/msme-ministry.png";
+import mcaLogo from "../assets/certifications/mca-ministry.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -431,6 +433,33 @@ function Index() {
         <Reveal delay={0.1} className="mt-10 pb-20">
           <LogoRail rowA={logoRailRowA} rowB={logoRailRowB} />
         </Reveal>
+      </section>
+
+      {/* ---------------- GOVERNMENT CERTIFICATIONS ---------------- */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-[1400px] px-5 py-20 text-center sm:px-8">
+          <Reveal>
+            <p className="display-lg mx-auto max-w-3xl text-foreground">
+              We are recognized and certified by leading Government Organizations
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
+              <img
+                src={msmeLogo}
+                alt="Ministry of Micro, Small and Medium Enterprises, Government of India"
+                loading="lazy"
+                className="h-28 w-auto sm:h-32"
+              />
+              <img
+                src={mcaLogo}
+                alt="Ministry of Corporate Affairs, Government of India"
+                loading="lazy"
+                className="h-16 w-auto sm:h-20"
+              />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* ---------------- FINAL CTA ---------------- */}
