@@ -6,6 +6,7 @@ export type ImmersiveServiceItem = {
   title: string;
   desc: string;
   img: string;
+  video?: string;
 };
 
 function lerp(a: number, b: number, f: number) {
@@ -43,6 +44,7 @@ const whatsappLink = (service: string) =>
 
 export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceItem[] }) {
   const stageRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
   const [width, setWidth] = useState(1000);
   const [activeIndex, setActiveIndex] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -101,12 +103,19 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
           const isActive = i === activeIndex;
 
           return (
-            <button
+            <div
               key={item.title}
-              type="button"
+              role={isActive ? undefined : "button"}
               aria-label={isActive ? undefined : `Show ${item.title}`}
               tabIndex={isActive ? -1 : 0}
               onClick={() => !isActive && goTo(i)}
+              onKeyDown={(e) => {
+                if (isActive) return;
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  goTo(i);
+                }
+              }}
               className="cursor-hover-target absolute left-1/2 top-1/2 border-0 bg-transparent p-0 text-left"
               style={{
                 width: cardW,
@@ -120,14 +129,45 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                 transition: "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease",
               }}
             >
-              <div className="flex size-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface shadow-[var(--shadow-feature)]">
-                <div className="relative h-[58%] w-full shrink-0 overflow-hidden bg-muted">
+              <div className="group flex size-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface shadow-[var(--shadow-feature)]">
+                <div
+                  className="relative h-[58%] w-full shrink-0 overflow-hidden bg-muted"
+                  onMouseEnter={() => {
+                    const v = videoRefs.current.get(i);
+                    if (v) void v.play();
+                  }}
+                  onMouseLeave={() => {
+                    const v = videoRefs.current.get(i);
+                    if (v) {
+                      v.pause();
+                      v.currentTime = 0;
+                    }
+                  }}
+                >
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="size-full object-cover"
+                    className={
+                      item.video
+                        ? "size-full object-cover group-hover:invisible"
+                        : "size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    }
                     draggable={false}
                   />
+                  {item.video && (
+                    <video
+                      ref={(el) => {
+                        if (el) videoRefs.current.set(i, el);
+                        else videoRefs.current.delete(i);
+                      }}
+                      src={item.video}
+                      muted
+                      loop
+                      playsInline
+                      preload="none"
+                      className="invisible absolute inset-0 size-full object-cover group-hover:visible"
+                    />
+                  )}
                   <span className="absolute left-3 top-3 rounded-full bg-foreground/80 px-2.5 py-1 text-[0.65rem] font-bold tracking-wide text-background">
                     {item.num}
                   </span>
@@ -141,30 +181,22 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                       <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
                         {item.desc}
                       </p>
-                      <span
-                        role="button"
-                        tabIndex={0}
+                      <button
+                        type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           setOpenIndex(i);
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setOpenIndex(i);
-                          }
                         }}
                         className="cursor-hover-target mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-85"
                       >
                         View more
                         <ArrowUpRight className="size-3.5" />
-                      </span>
+                      </button>
                     </>
                   )}
                 </div>
               </div>
-            </button>
+            </div>
           );
         })}
       </div>
@@ -212,34 +244,36 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
       {openItem && (
         <div
           onClick={() => setOpenIndex(null)}
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/60 p-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/60 p-3 backdrop-blur-sm sm:p-5"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative flex w-full max-w-lg flex-col gap-6 rounded-[32px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:p-12"
+            className="relative grid max-h-[94vh] w-full grid-cols-1 gap-8 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:grid-cols-2 sm:items-stretch sm:gap-10 sm:p-14"
           >
             <button
               type="button"
               aria-label="Close"
               onClick={() => setOpenIndex(null)}
-              className="cursor-hover-target absolute right-5 top-5 flex size-10 items-center justify-center rounded-full border border-foreground/15 transition-colors hover:bg-muted"
+              className="cursor-hover-target absolute right-5 top-5 z-10 flex size-11 items-center justify-center rounded-full border border-foreground/15 bg-surface transition-colors hover:bg-muted"
             >
               <X className="size-4" />
             </button>
-            <div className="size-20 overflow-hidden rounded-2xl">
+            <div className="h-56 w-full shrink-0 overflow-hidden rounded-[28px] sm:h-full sm:min-h-[22rem]">
               <img src={openItem.img} alt={openItem.title} className="size-full object-cover" />
             </div>
-            <h3 className="display-lg max-w-md">{openItem.title}</h3>
-            <p className="text-base leading-relaxed text-muted-foreground">{openItem.desc}</p>
-            <a
-              href={whatsappLink(openItem.title)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary self-start"
-            >
-              Get a Free Consultation
-              <ArrowUpRight className="size-4" />
-            </a>
+            <div className="flex flex-col justify-center gap-5">
+              <h3 className="display-xl">{openItem.title}</h3>
+              <p className="text-lg leading-relaxed text-muted-foreground">{openItem.desc}</p>
+              <a
+                href={whatsappLink(openItem.title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary self-start"
+              >
+                Get a Free Consultation
+                <ArrowUpRight className="size-4" />
+              </a>
+            </div>
           </div>
         </div>
       )}
