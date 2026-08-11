@@ -288,7 +288,7 @@ export function ArcImageCarousel({
       onPointerCancel={onPointerUp}
       onLostPointerCapture={onPointerUp}
       onKeyDown={onKeyDown}
-      className={`relative mx-auto aspect-[900/620] w-full max-w-[1100px] overflow-hidden rounded-[40px] bg-paper outline-none ${
+      className={`relative mx-auto min-h-[520px] w-full max-w-[1100px] overflow-hidden rounded-[40px] bg-paper outline-none sm:aspect-[900/620] sm:min-h-0 ${
         dragging ? "cursor-grabbing" : "cursor-grab"
       }`}
     >

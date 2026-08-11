@@ -71,16 +71,6 @@ const channels = [
   },
 ];
 
-const marqueeWords = [
-  "Let's Talk",
-  "Web Development",
-  "Digital Marketing",
-  "Branding",
-  "SEO",
-  "AI Automation",
-  "Say Hello",
-];
-
 const services = [
   "Performance Marketing",
   "Website & App Development",
@@ -184,24 +174,6 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* ---------------- MARQUEE STRIP ---------------- */}
-      <section className="overflow-hidden bg-foreground py-4 text-background">
-        <div className="flex w-max animate-marquee-slow gap-10">
-          {[0, 1].map((dup) => (
-            <div key={dup} aria-hidden={dup === 1} className="flex shrink-0 items-center gap-10">
-              {marqueeWords.map((word) => (
-                <span key={word} className="flex items-center gap-10">
-                  <span className="font-display text-lg tracking-tight text-background/90 sm:text-2xl">
-                    {word}
-                  </span>
-                  <span className="size-1.5 shrink-0 rounded-full bg-accent" />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ---------------- FORM + CHANNELS ---------------- */}
       <section className="bg-background">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
@@ -215,7 +187,7 @@ function ContactPage() {
                 Hi
               </p>
 
-              <div className="relative">
+              <div className="glass-pill relative rounded-[40px] p-8 sm:p-10 lg:p-12">
                 <p className="eyebrow">Let's Talk</p>
                 <h2 className="display-lg mt-6 max-w-lg">
                   Tell us about your project, we'll take it from there.

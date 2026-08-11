@@ -201,7 +201,7 @@ function Index() {
         <div
           ref={heroRef}
           data-cursor-zone="dark"
-          className="relative mx-auto h-[75svh] max-h-[820px] min-h-[560px] w-full max-w-[1600px] overflow-hidden rounded-[40px]"
+          className="relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-[40px] sm:h-[75svh] sm:max-h-[820px] sm:min-h-[560px]"
         >
           <video
             ref={heroImgRef}
@@ -214,7 +214,7 @@ function Index() {
           />
           <div className="veil absolute inset-0" />
 
-          <div className="relative flex h-full flex-col justify-end p-6 text-background sm:p-10 lg:p-14">
+          <div className="relative flex flex-col justify-end p-6 pb-10 text-background sm:h-full sm:p-10 lg:p-14">
             <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-4xl">
                 <p data-hero-eyebrow className="eyebrow text-background/70 opacity-0">
