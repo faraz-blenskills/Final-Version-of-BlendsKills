@@ -12,7 +12,13 @@ import {
 
 import { Reveal } from "../components/site/Reveal";
 import { CountUp } from "../components/site/CountUp";
+import { TeamCarousel, type TeamMember } from "../components/site/TeamCarousel";
 import aboutImg from "../assets/about.jpg";
+import omPolPhoto from "../assets/team/om-pol.jpg";
+import farazSayyedPhoto from "../assets/team/faraz-sayyed.jpg";
+import saraBakshiPhoto from "../assets/team/sara-bakshi.jpg";
+import yashJagtapPhoto from "../assets/team/yash-jagtap.jpg";
+import sahilPardeshiPhoto from "../assets/team/sahil-pardeshi.jpg";
 
 export const Route = createFileRoute("/about-us")({
   head: () => ({
@@ -91,6 +97,47 @@ const proofStats = [
   { value: "2.7k", label: "Positive reviews from happy clients" },
   { value: "95%", label: "Client satisfaction across every project" },
   { value: "85%", label: "Average business growth rate delivered" },
+];
+
+const team: TeamMember[] = [
+  {
+    name: "Om Pol",
+    role: "Chief Operating Officer",
+    quote: "Building quietly. Growing consistently.",
+    photo: omPolPhoto,
+  },
+  {
+    name: "Faraz Sayyed",
+    role: "IT Head",
+    quote: "Do not wait for confidence, take action to build confidence.",
+    photo: farazSayyedPhoto,
+    photoPosition: "50% 8%",
+    photoSize: "170% auto",
+  },
+  {
+    name: "Sara Bakshi",
+    role: "Head of R&D",
+    quote:
+      "Every hypothesis we test is rigorously validated by empirical metrics and real-world utility.",
+    photo: saraBakshiPhoto,
+    photoPosition: "52% 14%",
+    photoSize: "142% auto",
+  },
+  {
+    name: "Yash Jagtap",
+    role: "Chief Head of Media",
+    quote:
+      "Creativity with consistency creates impact. I believe in learning, experimenting, and creating content that connects.",
+    photo: yashJagtapPhoto,
+    photoPosition: "50% 6%",
+  },
+  {
+    name: "Sahil Pardeshi",
+    role: "Senior Developer",
+    quote: "Perfection is not attainable, but if we chase perfection we can catch excellence.",
+    photo: sahilPardeshiPhoto,
+    photoPosition: "50% 10%",
+  },
 ];
 
 const testimonials = [
@@ -292,6 +339,24 @@ function AboutUsPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- MEET OUR TEAM ---------------- */}
+      <section data-cursor-zone="dark" className="bg-foreground text-background">
+        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow justify-center text-background/70">Our Team</p>
+            <h2 className="display-lg mt-6">The People Behind BlendSkills.</h2>
+            <p className="mt-6 text-base leading-relaxed text-background/70">
+              Senior team that stays close to every project — strategy, design, development, and
+              growth, handled by people who actually do the work.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.12} className="mx-auto mt-16 w-4/5">
+            <TeamCarousel members={team} />
+          </Reveal>
         </div>
       </section>
 
