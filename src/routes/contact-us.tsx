@@ -21,6 +21,13 @@ import {
 } from "../components/ui/accordion";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 import heroImg from "../assets/hero.jpg";
 
 export const Route = createFileRoute("/contact-us")({
@@ -71,16 +78,6 @@ const channels = [
   },
 ];
 
-const marqueeWords = [
-  "Let's Talk",
-  "Web Development",
-  "Digital Marketing",
-  "Branding",
-  "SEO",
-  "AI Automation",
-  "Say Hello",
-];
-
 const services = [
   "Performance Marketing",
   "Website & App Development",
@@ -119,7 +116,7 @@ function ContactPage() {
     name: "",
     email: "",
     phone: "",
-    service: services[0],
+    service: services[0]!,
     message: "",
   });
   const [sent, setSent] = useState(false);
@@ -184,24 +181,6 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* ---------------- MARQUEE STRIP ---------------- */}
-      <section className="overflow-hidden bg-foreground py-4 text-background">
-        <div className="flex w-max animate-marquee-slow gap-10">
-          {[0, 1].map((dup) => (
-            <div key={dup} aria-hidden={dup === 1} className="flex shrink-0 items-center gap-10">
-              {marqueeWords.map((word) => (
-                <span key={word} className="flex items-center gap-10">
-                  <span className="font-display text-lg tracking-tight text-background/90 sm:text-2xl">
-                    {word}
-                  </span>
-                  <span className="size-1.5 shrink-0 rounded-full bg-accent" />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ---------------- FORM + CHANNELS ---------------- */}
       <section className="bg-background">
         <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
@@ -215,7 +194,7 @@ function ContactPage() {
                 Hi
               </p>
 
-              <div className="relative">
+              <div className="glass-pill relative rounded-[40px] p-8 sm:p-10 lg:p-12">
                 <p className="eyebrow">Let's Talk</p>
                 <h2 className="display-lg mt-6 max-w-lg">
                   Tell us about your project, we'll take it from there.
@@ -273,18 +252,21 @@ function ContactPage() {
                     <label htmlFor="service" className="text-sm font-medium">
                       Interested in
                     </label>
-                    <select
-                      id="service"
+                    <Select
                       value={form.service}
-                      onChange={(e) => update("service", e.target.value)}
-                      className="h-12 w-full rounded-[16px] border border-input bg-card px-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                      onValueChange={(value) => update("service", value)}
                     >
-                      {services.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
+                      <SelectTrigger id="service">
+                        <SelectValue placeholder="Select a service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {services.map((s) => (
+                          <SelectItem key={s} value={s}>
+                            {s}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="flex flex-col gap-2 sm:col-span-2">
@@ -320,7 +302,7 @@ function ContactPage() {
             <div className="flex flex-col gap-6">
               <Reveal delay={0.08} className="grid grid-cols-2 gap-4">
                 {[
-                  { value: "10+", label: "Years driving digital growth", Icon: Clock },
+                  { value: "21+", label: "Years driving digital growth", Icon: Clock },
                   { value: "100+", label: "Brands partnered so far", Icon: Users },
                 ].map(({ value, label, Icon }) => (
                   <div key={label} className="card-soft bg-foreground p-6 text-background">

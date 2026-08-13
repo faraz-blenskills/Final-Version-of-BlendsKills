@@ -32,6 +32,8 @@ import openaiLogo from "../assets/logo-rail/openai.png";
 import claudeLogo from "../assets/logo-rail/claude.png";
 import googleAnalyticsLogo from "../assets/logo-rail/google-analytics.png";
 import metaLogo from "../assets/logo-rail/meta.png";
+import msmeLogo from "../assets/certifications/msme-ministry.png";
+import mcaLogo from "../assets/certifications/mca-ministry.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -201,7 +203,7 @@ function Index() {
         <div
           ref={heroRef}
           data-cursor-zone="dark"
-          className="relative mx-auto h-[75svh] max-h-[820px] min-h-[560px] w-full max-w-[1600px] overflow-hidden rounded-[40px]"
+          className="relative mx-auto w-full max-w-[1600px] overflow-hidden rounded-[40px] sm:h-[75svh] sm:max-h-[820px] sm:min-h-[560px]"
         >
           <video
             ref={heroImgRef}
@@ -214,7 +216,7 @@ function Index() {
           />
           <div className="veil absolute inset-0" />
 
-          <div className="relative flex h-full flex-col justify-end p-6 text-background sm:p-10 lg:p-14">
+          <div className="relative flex flex-col justify-end p-6 pb-10 text-background sm:h-full sm:p-10 lg:p-14">
             <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-4xl">
                 <p data-hero-eyebrow className="eyebrow text-background/70 opacity-0">
@@ -431,6 +433,33 @@ function Index() {
         <Reveal delay={0.1} className="mt-10 pb-20">
           <LogoRail rowA={logoRailRowA} rowB={logoRailRowB} />
         </Reveal>
+      </section>
+
+      {/* ---------------- GOVERNMENT CERTIFICATIONS ---------------- */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-[1400px] px-5 py-20 text-center sm:px-8">
+          <Reveal>
+            <p className="display-lg mx-auto max-w-3xl text-foreground">
+              We are recognized and certified by leading Government Organizations
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-14 gap-y-10">
+              <img
+                src={msmeLogo}
+                alt="Ministry of Micro, Small and Medium Enterprises, Government of India"
+                loading="lazy"
+                className="h-28 w-auto sm:h-32"
+              />
+              <img
+                src={mcaLogo}
+                alt="Ministry of Corporate Affairs, Government of India"
+                loading="lazy"
+                className="h-16 w-auto sm:h-20"
+              />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* ---------------- FINAL CTA ---------------- */}
