@@ -19,7 +19,7 @@ export function SiteNav() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 pt-6 sm:px-8">
         <Link
           to="/"
-          aria-label="BlendSkills — Home"
+          aria-label="BlendSkills Home"
           className="glass-pill pointer-events-auto flex items-center rounded-full p-3"
         >
           <img src={logoMark} alt="BlendSkills" className="h-11 w-auto brightness-0" />

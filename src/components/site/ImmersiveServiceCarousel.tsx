@@ -5,8 +5,11 @@ export type ImmersiveServiceItem = {
   num: string;
   title: string;
   desc: string;
+  provide: string;
+  capabilities: string[];
   img: string;
   video?: string;
+  modalBg: string;
 };
 
 function lerp(a: number, b: number, f: number) {
@@ -83,7 +86,7 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
     }
   };
 
-  const cardW = clamp(width * 0.26, 220, 320);
+  const cardW = clamp(width * 0.32, 260, 380);
   const cardH = cardW * 1.5;
   const offset = cardW * 0.62;
 
@@ -91,123 +94,149 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
 
   return (
     <div className="relative flex flex-col bg-background">
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-6 pt-28 sm:px-8 sm:pt-32">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pb-2 pt-28 sm:px-8 sm:pt-32">
         <p className="eyebrow">Our Services</p>
-        <h1 className="display-xl mt-6 max-w-2xl">What We Do</h1>
+        <h1 className="display-xl mt-3 max-w-2xl">What We Do</h1>
       </div>
 
-      <div
-        ref={stageRef}
-        tabIndex={0}
-        onKeyDown={onKeyDown}
-        className="relative h-[62vh] min-h-[460px] max-h-[720px] w-full outline-none"
-      >
-        {items.map((item, i) => {
-          const raw = i - activeIndex;
-          const dist = Math.abs(raw);
-          const dir = raw === 0 ? 0 : raw > 0 ? 1 : -1;
-          const p = paramsAt(dist);
-          const tx = p.tx * offset * dir;
-          const ty = p.ty * cardH;
-          const isActive = i === activeIndex;
+      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] items-start gap-8 px-5 sm:px-8">
+        <div className="hidden w-[320px] shrink-0 pt-4 lg:block">
+          <p className="text-xl leading-relaxed text-foreground/80">
+            From performance marketing to AI automation, we design and build the systems growing
+            brands run on. Explore each service to see how we can help.
+          </p>
+          <div className="mt-8">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              Every engagement starts with a conversation about your goals, not a fixed package.
+              Pick a service to see exactly what's included.
+            </p>
+          </div>
+        </div>
 
-          return (
-            <div
-              key={item.title}
-              role={isActive ? undefined : "button"}
-              aria-label={isActive ? undefined : `Show ${item.title}`}
-              tabIndex={isActive ? -1 : 0}
-              onClick={() => !isActive && goTo(i)}
-              onKeyDown={(e) => {
-                if (isActive) return;
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  goTo(i);
-                }
-              }}
-              className="cursor-hover-target absolute left-1/2 top-1/2 border-0 bg-transparent p-0 text-left"
-              style={{
-                width: cardW,
-                height: cardH,
-                marginLeft: -cardW / 2,
-                marginTop: -cardH / 2,
-                transform: `translate(${tx}px, ${ty}px) scale(${p.scale})`,
-                filter: `blur(${p.blur}px)`,
-                zIndex: Math.round(100 - dist),
-                cursor: isActive ? "default" : "pointer",
-                transition: "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease",
-              }}
-            >
-              <div className="group flex size-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface shadow-[var(--shadow-feature)]">
+        <div
+          ref={stageRef}
+          tabIndex={0}
+          onKeyDown={onKeyDown}
+          className="relative h-[66vh] min-h-[500px] max-h-[780px] flex-1 outline-none"
+        >
+          {items.map((item, i) => {
+            const raw = i - activeIndex;
+            const dist = Math.abs(raw);
+            const dir = raw === 0 ? 0 : raw > 0 ? 1 : -1;
+            const p = paramsAt(dist);
+            const tx = p.tx * offset * dir;
+            const ty = p.ty * cardH;
+            const isActive = i === activeIndex;
+
+            return (
+              <div
+                key={item.title}
+                role="button"
+                aria-label={isActive ? `View ${item.title} details` : `Show ${item.title}`}
+                tabIndex={0}
+                onClick={() => (isActive ? setOpenIndex(i) : goTo(i))}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    if (isActive) setOpenIndex(i);
+                    else goTo(i);
+                  }
+                }}
+                className="cursor-hover-target absolute left-1/2 top-1/2 border-0 bg-transparent p-0 text-left"
+                style={{
+                  width: cardW,
+                  height: cardH,
+                  marginLeft: -cardW / 2,
+                  marginTop: -cardH / 2,
+                  transform: `translate(${tx}px, ${ty}px) scale(${p.scale})`,
+                  filter: `blur(${p.blur}px)`,
+                  zIndex: Math.round(100 - dist),
+                  cursor: "pointer",
+                  transition: "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease",
+                }}
+              >
                 <div
-                  className="relative h-[58%] w-full shrink-0 overflow-hidden bg-muted"
-                  onMouseEnter={() => {
-                    const v = videoRefs.current.get(i);
-                    if (v) void v.play();
-                  }}
-                  onMouseLeave={() => {
-                    const v = videoRefs.current.get(i);
-                    if (v) {
-                      v.pause();
-                      v.currentTime = 0;
-                    }
-                  }}
+                  className={`group flex size-full flex-col overflow-hidden rounded-[28px] bg-surface transition-[transform,box-shadow,border-color] duration-300 ${
+                    isActive
+                      ? "border-2 border-accent shadow-[var(--shadow-feature)] hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,0.35)]"
+                      : "border border-border shadow-[var(--shadow-feature)]"
+                  }`}
                 >
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className={
-                      item.video
-                        ? "size-full object-cover group-hover:invisible"
-                        : "size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                    }
-                    draggable={false}
-                  />
-                  {item.video && (
-                    <video
-                      ref={(el) => {
-                        if (el) videoRefs.current.set(i, el);
-                        else videoRefs.current.delete(i);
-                      }}
-                      src={item.video}
-                      muted
-                      loop
-                      playsInline
-                      preload="none"
-                      className="invisible absolute inset-0 size-full object-cover group-hover:visible"
+                  <div
+                    className="relative h-[58%] w-full shrink-0 overflow-hidden bg-muted"
+                    onMouseEnter={() => {
+                      const v = videoRefs.current.get(i);
+                      if (v) void v.play();
+                    }}
+                    onMouseLeave={() => {
+                      const v = videoRefs.current.get(i);
+                      if (v) {
+                        v.pause();
+                        v.currentTime = 0;
+                      }
+                    }}
+                  >
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className={
+                        item.video
+                          ? "size-full object-cover group-hover:invisible"
+                          : "size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                      }
+                      draggable={false}
                     />
-                  )}
-                  <span className="absolute left-3 top-3 rounded-full bg-foreground/80 px-2.5 py-1 text-[0.65rem] font-bold tracking-wide text-background">
-                    {item.num}
-                  </span>
-                </div>
-                <div className="flex min-h-0 flex-1 flex-col gap-1.5 p-4">
-                  <h3 className="font-display text-base font-medium leading-tight tracking-tight text-foreground sm:text-lg">
-                    {item.title}
-                  </h3>
-                  {isActive && (
-                    <>
-                      <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                        {item.desc}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenIndex(i);
+                    {item.video && (
+                      <video
+                        ref={(el) => {
+                          if (el) videoRefs.current.set(i, el);
+                          else videoRefs.current.delete(i);
                         }}
-                        className="cursor-hover-target mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-opacity hover:opacity-85"
-                      >
-                        View more
-                        <ArrowUpRight className="size-3.5" />
-                      </button>
-                    </>
-                  )}
+                        src={item.video}
+                        muted
+                        loop
+                        playsInline
+                        preload="none"
+                        className="invisible absolute inset-0 size-full object-cover group-hover:visible"
+                      />
+                    )}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-foreground/50 to-transparent" />
+                    <span
+                      className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[0.65rem] font-bold tracking-wide backdrop-blur-sm transition-opacity duration-200 ${
+                        item.video ? "group-hover:opacity-0" : ""
+                      } ${isActive ? "bg-accent text-accent-foreground" : "bg-foreground/80 text-background"}`}
+                    >
+                      {item.num}
+                    </span>
+                  </div>
+                  <div className="flex min-h-0 flex-1 flex-col gap-1.5 p-4">
+                    <h3 className="font-display text-base font-medium leading-tight tracking-tight text-foreground sm:text-lg">
+                      {item.title}
+                    </h3>
+                    {isActive && (
+                      <>
+                        <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                          {item.desc}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOpenIndex(i);
+                          }}
+                          className="cursor-hover-target mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-all hover:gap-2.5 hover:opacity-90"
+                        >
+                          View more
+                          <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] items-center justify-center gap-6 px-5 pb-16 pt-8 sm:px-8">
@@ -233,7 +262,8 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                 className="block h-[7px] rounded-full transition-[width,background-color] duration-200"
                 style={{
                   width: i === activeIndex ? 26 : 8,
-                  backgroundColor: i === activeIndex ? "var(--color-accent)" : "var(--color-border)",
+                  backgroundColor:
+                    i === activeIndex ? "var(--color-accent)" : "var(--color-border)",
                 }}
               />
             </button>
@@ -257,8 +287,30 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative grid max-h-[94vh] w-full grid-cols-1 gap-8 overflow-y-auto rounded-[40px] bg-surface p-8 text-foreground shadow-[var(--shadow-feature)] sm:grid-cols-2 sm:items-stretch sm:gap-10 sm:p-14"
+            data-lenis-prevent
+            className="no-scrollbar relative max-h-[94vh] w-[80vw] max-w-4xl overflow-y-auto overscroll-contain rounded-[40px] shadow-[var(--shadow-feature)]"
           >
+            <div className="absolute inset-0 overflow-hidden rounded-[40px] bg-surface">
+              {openItem.video ? (
+                <video
+                  key={openItem.video}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={openItem.modalBg}
+                  className="absolute inset-0 size-full scale-125 object-cover blur-2xl"
+                >
+                  <source src={openItem.video} type="video/mp4" />
+                </video>
+              ) : (
+                <div
+                  className="absolute inset-0 scale-125 bg-cover bg-center blur-2xl"
+                  style={{ backgroundImage: `url(${openItem.modalBg})` }}
+                />
+              )}
+            </div>
+
             <button
               type="button"
               aria-label="Close"
@@ -267,12 +319,20 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
             >
               <X className="size-4" />
             </button>
-            <div className="h-56 w-full shrink-0 overflow-hidden rounded-[28px] sm:h-full sm:min-h-[22rem]">
-              <img src={openItem.img} alt={openItem.title} className="size-full object-cover" />
-            </div>
-            <div className="flex flex-col justify-center gap-5">
+
+            <div className="relative flex flex-col gap-5 p-8 pt-20 text-foreground sm:p-14 sm:pt-16">
               <h3 className="display-xl">{openItem.title}</h3>
-              <p className="text-lg leading-relaxed text-muted-foreground">{openItem.desc}</p>
+              <p className="text-lg leading-relaxed text-foreground">{openItem.provide}</p>
+              <div className="flex flex-wrap gap-2">
+                {openItem.capabilities.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-full border border-foreground/15 bg-muted px-3 py-1.5 text-xs font-medium text-foreground/80"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
               <a
                 href={whatsappLink(openItem.title)}
                 target="_blank"

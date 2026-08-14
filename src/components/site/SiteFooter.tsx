@@ -29,7 +29,7 @@ export function SiteFooter() {
               </p>
             </div>
             <p className="mt-5 max-w-sm text-sm font-[450] text-background/70">
-              Driving Digital Growth with Innovation & Strategy — Your Growth, Our Mission.
+              Driving Digital Growth with Innovation & Strategy. Your Growth, Our Mission.
             </p>
           </div>
 
@@ -124,7 +124,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col gap-2 border-t border-background/15 pt-6 text-xs text-background/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 BlendSkills | All Rights Reserved.</p>
-          <p>Blendskills Pvt Ltd — "Your Digital Growth Partner"</p>
+          <p>Blendskills Pvt Ltd: "Your Digital Growth Partner"</p>
         </div>
       </div>
     </footer>
