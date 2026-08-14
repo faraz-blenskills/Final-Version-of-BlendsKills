@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { value: "10+", label: "Years of experience on digital marketing services" },
+  { value: "21+", label: "Years of experience on digital marketing services" },
   { value: "95%", label: "Improved projects delivered for growing brands" },
   { value: "80%", label: "New projects won through referral and results" },
   { value: "100+", label: "Brands partnered across Pune, Gaya and beyond" },
