@@ -28,7 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import heroImg from "../assets/hero.jpg";
+import heroMotion from "../assets/contact-hero-motion.mp4";
 
 export const Route = createFileRoute("/contact-us")({
   head: () => ({
@@ -152,11 +152,12 @@ function ContactPage() {
           data-cursor-zone="dark"
           className="relative overflow-hidden rounded-[40px] text-background"
         >
-          <img
-            src={heroImg}
-            alt="Motion-blurred professionals in a studio with warm light streaks"
-            width={1920}
-            height={1088}
+          <video
+            src={heroMotion}
+            autoPlay
+            muted
+            loop
+            playsInline
             className="absolute inset-0 size-full object-cover"
           />
           <div className="veil absolute inset-0" />
