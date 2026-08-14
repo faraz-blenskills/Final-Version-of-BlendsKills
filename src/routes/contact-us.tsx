@@ -71,7 +71,7 @@ const channels = [
     Icon: Mail,
   },
   {
-    label: "Office Address",
+    label: "Branches",
     value: "Pune | Gaya",
     href: "https://maps.app.goo.gl/mQwnoi4h4ffmoqU6A",
     Icon: MapPin,
