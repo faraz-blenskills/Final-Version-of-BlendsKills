@@ -105,6 +105,7 @@ const team: TeamMember[] = [
     role: "Chief Operating Officer",
     quote: "Building quietly. Growing consistently.",
     photo: omPolPhoto,
+    photoPosition: "50% 8%",
   },
   {
     name: "Faraz Sayyed",
@@ -120,8 +121,7 @@ const team: TeamMember[] = [
     quote:
       "Every hypothesis we test is rigorously validated by empirical metrics and real-world utility.",
     photo: saraBakshiPhoto,
-    photoPosition: "52% 14%",
-    photoSize: "142% auto",
+    photoPosition: "50% 15%",
   },
   {
     name: "Yash Jagtap",
