@@ -37,7 +37,7 @@ export const Route = createFileRoute("/contact-us")({
       {
         name: "description",
         content:
-          "Get in touch with BlendSkills for tailored digital solutions that drive results. Call +91 9175789966 or email info@blendskills.co.in.",
+          "Get in touch with BlendSkills for tailored digital solutions that drive results. Call +91 9175789966 or email support@blendskills.co.in.",
       },
       { property: "og:title", content: "Contact Us | BlendSkills" },
       {
@@ -66,8 +66,8 @@ const channels = [
   },
   {
     label: "Email Address",
-    value: "info@blendskills.co.in",
-    href: "mailto:info@blendskills.co.in",
+    value: "support@blendskills.co.in",
+    href: "mailto:support@blendskills.co.in",
     Icon: Mail,
   },
   {
