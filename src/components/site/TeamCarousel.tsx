@@ -133,12 +133,12 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
 
   return (
     <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="flex items-center gap-4 sm:gap-6">
+      <div className="flex items-center gap-2 sm:gap-6">
         <button
           type="button"
           aria-label="Previous team member"
           onClick={() => step(-1)}
-          className="glass-pill cursor-hover-target flex size-11 shrink-0 items-center justify-center rounded-full sm:size-12"
+          className="glass-pill cursor-hover-target flex size-9 shrink-0 items-center justify-center rounded-full sm:size-12"
         >
           <ChevronLeft className="size-5" />
         </button>
@@ -210,7 +210,7 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
           type="button"
           aria-label="Next team member"
           onClick={() => step(1)}
-          className="glass-pill cursor-hover-target flex size-11 shrink-0 items-center justify-center rounded-full sm:size-12"
+          className="glass-pill cursor-hover-target flex size-9 shrink-0 items-center justify-center rounded-full sm:size-12"
         >
           <ChevronRight className="size-5" />
         </button>

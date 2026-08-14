@@ -354,7 +354,7 @@ function AboutUsPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.12} className="mx-auto mt-16 w-4/5">
+          <Reveal delay={0.12} className="mx-auto mt-16 w-full lg:w-4/5">
             <TeamCarousel members={team} />
           </Reveal>
         </div>
