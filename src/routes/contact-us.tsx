@@ -33,13 +33,13 @@ import heroImg from "../assets/hero.jpg";
 export const Route = createFileRoute("/contact-us")({
   head: () => ({
     meta: [
-      { title: "Contact BlendSkills — Digital Growth Partner in Pune | Gaya" },
+      { title: "Contact BlendSkills: Digital Growth Partner in Pune | Gaya" },
       {
         name: "description",
         content:
           "Get in touch with BlendSkills for tailored digital solutions that drive results. Call +91 9175789966 or email info@blendskills.co.in.",
       },
-      { property: "og:title", content: "Contact Us — BlendSkills" },
+      { property: "og:title", content: "Contact Us | BlendSkills" },
       {
         property: "og:description",
         content: "Reach out for tailored digital marketing and development solutions. Pune | Gaya.",
@@ -91,11 +91,11 @@ const services = [
 const faqs = [
   {
     q: "What services does BlendSkills actually cover?",
-    a: "Everything a growing brand needs under one roof — performance marketing, website & app development, branding and creative design, AI & business automation, SEO and social media growth, plus video production and content creation.",
+    a: "Everything a growing brand needs under one roof: performance marketing, website & app development, branding and creative design, AI & business automation, SEO and social media growth, plus video production and content creation.",
   },
   {
     q: "Do you only work with businesses in Pune and Gaya?",
-    a: "Pune, Maharashtra and Gaya, Bihar are home base, but we partner with startups and growing brands across Maharashtra, Bihar, and beyond — most of our work happens remotely regardless of where you're based.",
+    a: "Pune, Maharashtra and Gaya, Bihar are home base, but we partner with startups and growing brands across Maharashtra, Bihar, and beyond. Most of our work happens remotely regardless of where you're based.",
   },
   {
     q: "What does getting started look like?",
@@ -107,7 +107,7 @@ const faqs = [
   },
   {
     q: "Do you help after the website or campaign goes live?",
-    a: "Yes — ongoing technical support, maintenance, and optimization are part of how we work, so your digital presence keeps improving long after launch.",
+    a: "Yes, ongoing technical support, maintenance, and optimization are part of how we work, so your digital presence keeps improving long after launch.",
   },
 ];
 
@@ -201,7 +201,7 @@ function ContactPage() {
                 </h2>
                 <p className="mt-6 max-w-lg text-base text-muted-foreground">
                   Fill in a few details and we'll turn it into a WhatsApp message straight to our
-                  team — no waiting on a contact-form black hole.
+                  team, no waiting on a contact-form black hole.
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-10 grid gap-5 sm:grid-cols-2">
@@ -290,7 +290,7 @@ function ContactPage() {
                     </button>
                     {sent && (
                       <p className="text-sm text-muted-foreground">
-                        Almost done — just hit send in WhatsApp to reach us.
+                        Almost done. Just hit send in WhatsApp to reach us.
                       </p>
                     )}
                   </div>

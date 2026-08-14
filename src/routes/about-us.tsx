@@ -23,17 +23,17 @@ import sahilPardeshiPhoto from "../assets/team/sahil-pardeshi.jpg";
 export const Route = createFileRoute("/about-us")({
   head: () => ({
     meta: [
-      { title: "About Us — BlendSkills Digital Marketing & Web Development" },
+      { title: "About Us: BlendSkills Digital Marketing & Web Development" },
       {
         name: "description",
         content:
           "BlendSkills is a leading digital marketing and web development company in Pune, Maharashtra with a strong presence in Gaya, Bihar. Learn who we are, our core values, and how we work.",
       },
-      { property: "og:title", content: "About Us — BlendSkills" },
+      { property: "og:title", content: "About Us | BlendSkills" },
       {
         property: "og:description",
         content:
-          "Who we are and what drives us — innovation, results, and trust across every project we deliver.",
+          "Who we are and what drives us: innovation, results, and trust across every project we deliver.",
       },
       { property: "og:url", content: "/about-us" },
     ],
@@ -161,7 +161,7 @@ const testimonials = [
   },
   {
     quote:
-      "The team at BlendSkills delivered exactly what our business needed—from website development to social media marketing. Their SEO-focused strategies helped us improve visibility and attract the right audience.",
+      "The team at BlendSkills delivered exactly what our business needed, from website development to social media marketing. Their SEO-focused strategies helped us improve visibility and attract the right audience.",
     name: "David Mont",
     role: "Marketing Director",
   },
@@ -349,7 +349,7 @@ function AboutUsPage() {
             <p className="eyebrow justify-center text-background/70">Our Team</p>
             <h2 className="display-lg mt-6">The People Behind BlendSkills.</h2>
             <p className="mt-6 text-base leading-relaxed text-background/70">
-              Senior team that stays close to every project — strategy, design, development, and
+              Senior team that stays close to every project: strategy, design, development, and
               growth, handled by people who actually do the work.
             </p>
           </Reveal>

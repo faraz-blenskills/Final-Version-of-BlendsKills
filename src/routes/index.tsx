@@ -41,16 +41,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "BlendSkills — Digital Marketing & Web Development in Pune | Gaya",
+        title: "BlendSkills: Digital Marketing & Web Development in Pune | Gaya",
       },
       {
         name: "description",
         content:
-          "BlendSkills drives growth through development and digital marketing — SEO, Google Ads, social media, branding, website and app development in Pune and Gaya.",
+          "BlendSkills drives growth through development and digital marketing: SEO, Google Ads, social media, branding, website and app development in Pune and Gaya.",
       },
       {
         property: "og:title",
-        content: "BlendSkills — Driving Growth Through Development and Digital Marketing",
+        content: "BlendSkills: Driving Growth Through Development and Digital Marketing",
       },
       {
         property: "og:description",
@@ -85,12 +85,12 @@ const whyCards = [
   {
     Icon: Target,
     title: "ROI-Focused Marketing",
-    body: "We don't just run campaigns — we build profitable growth engines. Every strategy is designed to deliver higher returns, better conversions, and sustainable business growth.",
+    body: "We don't just run campaigns. We build profitable growth engines. Every strategy is designed to deliver higher returns, better conversions, and sustainable business growth.",
   },
   {
     Icon: HeartHandshake,
     title: "Dedicated Growth Partner",
-    body: "You don't just get an agency — you get a committed digital partner driven by your success. Transparency, dedication, and innovation guide every project we take on.",
+    body: "You don't just get an agency. You get a committed digital partner driven by your success. Transparency, dedication, and innovation guide every project we take on.",
   },
 ];
 
@@ -238,7 +238,7 @@ function Index() {
                   className="mt-8 max-w-xl text-base leading-relaxed text-background/80 opacity-0"
                 >
                   We accelerate brand success with data-driven strategies, creative storytelling,
-                  and cutting-edge web solutions. When results matter, brands choose experience —
+                  and cutting-edge web solutions. When results matter, brands choose experience,
                   and they choose us.
                 </p>
                 <Link
@@ -333,7 +333,7 @@ function Index() {
                 audience, and goals, then craft a tailored strategy backed by research and data.
                 Our team designs intuitive user experiences, develops high-performance websites
                 and intelligent digital solutions, and rigorously tests every detail before
-                launch. But our work doesn't end there—we continuously optimize, analyze, and
+                launch. But our work doesn't end there. We continuously optimize, analyze, and
                 refine your digital ecosystem using AI, automation, and performance insights to
                 ensure sustainable growth, measurable results, and long-term business success.
               </p>
