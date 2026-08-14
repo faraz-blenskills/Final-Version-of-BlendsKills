@@ -45,12 +45,15 @@ const whatsappLink = (service: string) =>
     service,
   )}%20services.`;
 
+const AUTOPLAY_MS = 4200;
+
 export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceItem[] }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
   const [width, setWidth] = useState(1000);
   const [activeIndex, setActiveIndex] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
   const N = items.length;
 
   useEffect(() => {
@@ -73,6 +76,14 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
       document.documentElement.style.overflow = previousOverflow;
     };
   }, [openIndex]);
+
+  useEffect(() => {
+    if (isPaused || openIndex !== null) return;
+    const id = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % N);
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [isPaused, openIndex, N]);
 
   const goTo = (i: number) => setActiveIndex(((i % N) + N) % N);
 
@@ -117,10 +128,14 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
           ref={stageRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           className="relative h-[66vh] min-h-[500px] max-h-[780px] flex-1 outline-none"
         >
           {items.map((item, i) => {
-            const raw = i - activeIndex;
+            let raw = (i - activeIndex) % N;
+            if (raw > N / 2) raw -= N;
+            if (raw < -N / 2) raw += N;
             const dist = Math.abs(raw);
             const dir = raw === 0 ? 0 : raw > 0 ? 1 : -1;
             const p = paramsAt(dist);
@@ -148,10 +163,12 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                   height: cardH,
                   marginLeft: -cardW / 2,
                   marginTop: -cardH / 2,
-                  transform: `translate(${tx}px, ${ty}px) scale(${p.scale})`,
+                  transform: `translate3d(${tx}px, ${ty}px, 0) scale(${p.scale})`,
                   filter: `blur(${p.blur}px)`,
                   zIndex: Math.round(100 - dist),
                   cursor: "pointer",
+                  willChange: "transform, filter",
+                  backfaceVisibility: "hidden",
                   transition: "transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease",
                 }}
               >
