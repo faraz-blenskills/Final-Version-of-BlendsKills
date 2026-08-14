@@ -122,9 +122,17 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-background/15 pt-6 text-xs text-background/50 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 BlendSkills | All Rights Reserved.</p>
-          <p>Blendskills Pvt Ltd: "Your Digital Growth Partner"</p>
+        <div className="mt-14 flex flex-col gap-4 border-t border-background/15 pt-6 text-xs text-background/50 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+            <p>© 2026 BlendSkills | All Rights Reserved.</p>
+            <p>Blendskills Pvt Ltd: "Your Digital Growth Partner"</p>
+          </div>
+          <Link
+            to="/terms-and-conditions"
+            className="cursor-hover-target inline-flex w-fit items-center rounded-full border border-background/20 px-4 py-2 text-xs font-medium text-background transition-colors hover:bg-background/10"
+          >
+            Terms &amp; Conditions
+          </Link>
         </div>
       </div>
     </footer>

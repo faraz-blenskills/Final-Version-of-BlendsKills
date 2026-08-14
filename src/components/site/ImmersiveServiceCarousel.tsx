@@ -156,10 +156,8 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                 }}
               >
                 <div
-                  className={`group flex size-full flex-col overflow-hidden rounded-[28px] bg-surface transition-[transform,box-shadow,border-color] duration-300 ${
-                    isActive
-                      ? "border-2 border-accent shadow-[var(--shadow-feature)] hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,0.35)]"
-                      : "border border-border shadow-[var(--shadow-feature)]"
+                  className={`group flex size-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface shadow-[var(--shadow-feature)] transition-[transform,box-shadow] duration-300 ${
+                    isActive ? "hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,0.35)]" : ""
                   }`}
                 >
                   <div
@@ -201,13 +199,6 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                       />
                     )}
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-foreground/50 to-transparent" />
-                    <span
-                      className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[0.65rem] font-bold tracking-wide backdrop-blur-sm transition-opacity duration-200 ${
-                        item.video ? "group-hover:opacity-0" : ""
-                      } ${isActive ? "bg-accent text-accent-foreground" : "bg-foreground/80 text-background"}`}
-                    >
-                      {item.num}
-                    </span>
                   </div>
                   <div className="flex min-h-0 flex-1 flex-col gap-1.5 p-4">
                     <h3 className="font-display text-base font-medium leading-tight tracking-tight text-foreground sm:text-lg">
@@ -342,6 +333,7 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                 Get a Free Consultation
                 <ArrowUpRight className="size-4" />
               </a>
+              <p className="text-xs text-foreground">Terms and conditions apply.</p>
             </div>
           </div>
         </div>
