@@ -386,7 +386,7 @@ function Index() {
               title="Brand's we've helped to grow"
               subtitle="A glimpse of the partners we've built strategy, sites, and campaigns for across Pune, Gaya, and beyond."
               ctaLabel="View full portfolio"
-              ctaTo="/services"
+              ctaTo="/portfolio"
             />
           </Reveal>
         </div>
