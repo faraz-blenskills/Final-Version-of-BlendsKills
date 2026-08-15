@@ -25,7 +25,7 @@ export function SiteFooter() {
             <div className="flex items-center gap-2.5">
               <img src={logoMark} alt="" className="h-8 w-auto" />
               <p className="font-display text-xl font-medium text-background">
-                BLENDSKILLS<sup className="ml-0.5 text-[0.6em] text-accent">®</sup>
+                BLENDSKILLS<sup className="ml-0.5 text-[0.9em] text-accent">®</sup>
               </p>
             </div>
             <p className="mt-5 max-w-sm text-sm font-[450] text-background/70">
