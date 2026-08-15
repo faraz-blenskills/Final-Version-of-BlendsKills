@@ -28,7 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import heroImg from "../assets/hero.jpg";
+import heroMotion from "../assets/contact-hero-motion.mp4";
 
 export const Route = createFileRoute("/contact-us")({
   head: () => ({
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/contact-us")({
       {
         name: "description",
         content:
-          "Get in touch with BlendSkills for tailored digital solutions that drive results. Call +91 9175789966 or email info@blendskills.co.in.",
+          "Get in touch with BlendSkills for tailored digital solutions that drive results. Call +91 9175789966 or email support@blendskills.co.in.",
       },
       { property: "og:title", content: "Contact Us | BlendSkills" },
       {
@@ -66,12 +66,12 @@ const channels = [
   },
   {
     label: "Email Address",
-    value: "info@blendskills.co.in",
-    href: "mailto:info@blendskills.co.in",
+    value: "support@blendskills.co.in",
+    href: "mailto:support@blendskills.co.in",
     Icon: Mail,
   },
   {
-    label: "Office Address",
+    label: "Branches",
     value: "Pune | Gaya",
     href: "https://maps.app.goo.gl/mQwnoi4h4ffmoqU6A",
     Icon: MapPin,
@@ -152,11 +152,12 @@ function ContactPage() {
           data-cursor-zone="dark"
           className="relative overflow-hidden rounded-[40px] text-background"
         >
-          <img
-            src={heroImg}
-            alt="Motion-blurred professionals in a studio with warm light streaks"
-            width={1920}
-            height={1088}
+          <video
+            src={heroMotion}
+            autoPlay
+            muted
+            loop
+            playsInline
             className="absolute inset-0 size-full object-cover"
           />
           <div className="veil absolute inset-0" />

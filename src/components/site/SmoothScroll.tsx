@@ -21,7 +21,29 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
 
+    // Sections further down the page (e.g. Reveal's scroll-triggered fade-ins)
+    // have their trigger position calculated relative to the document height
+    // at the moment they mount. Any component below them that measures its own
+    // size asynchronously (ResizeObserver-driven carousels, images without
+    // reserved aspect-ratio, etc.) can shift that height afterward, leaving
+    // earlier ScrollTriggers pointing at stale positions — sections then only
+    // reveal once you've scrolled much further than expected. Refresh
+    // ScrollTrigger whenever the document's height actually changes so every
+    // trigger stays in sync with the real layout, no matter which component
+    // caused the shift.
+    let resizeRaf = 0;
+    const refresh = () => {
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
+    const ro = new ResizeObserver(refresh);
+    ro.observe(document.body);
+    window.addEventListener("load", refresh);
+
     return () => {
+      window.removeEventListener("load", refresh);
+      ro.disconnect();
+      cancelAnimationFrame(resizeRaf);
       gsap.ticker.remove(update);
       lenis.destroy();
     };

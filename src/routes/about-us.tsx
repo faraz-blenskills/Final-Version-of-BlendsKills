@@ -105,6 +105,7 @@ const team: TeamMember[] = [
     role: "Chief Operating Officer",
     quote: "Building quietly. Growing consistently.",
     photo: omPolPhoto,
+    photoPosition: "50% 8%",
   },
   {
     name: "Faraz Sayyed",
@@ -120,8 +121,7 @@ const team: TeamMember[] = [
     quote:
       "Every hypothesis we test is rigorously validated by empirical metrics and real-world utility.",
     photo: saraBakshiPhoto,
-    photoPosition: "52% 14%",
-    photoSize: "142% auto",
+    photoPosition: "50% 15%",
   },
   {
     name: "Yash Jagtap",
@@ -354,7 +354,7 @@ function AboutUsPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.12} className="mx-auto mt-16 w-4/5">
+          <Reveal delay={0.12} className="mx-auto mt-16 w-full lg:w-4/5">
             <TeamCarousel members={team} />
           </Reveal>
         </div>

@@ -37,8 +37,11 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
   const trackWrapRef = useRef<HTMLDivElement>(null);
   const perView = useResponsivePerView(trackWrapRef);
   const n = members.length;
+  // With 3 cards visible, the centered one is the middle of the three; with a
+  // single card visible on mobile, the centered one is the only one showing.
+  const centerOffset = Math.floor(perView / 2);
 
-  const [pos, setPos] = useState(n - 1);
+  const [pos, setPos] = useState(((n - centerOffset) % n + n) % n);
   const [animate, setAnimate] = useState(true);
   const lockedRef = useRef(false);
   const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -49,8 +52,8 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
 
   // keep pos valid whenever perView (and thus the loop math) changes
   useEffect(() => {
-    setPos(n - 1);
-  }, [perView, n]);
+    setPos(((n - centerOffset) % n + n) % n);
+  }, [perView, n, centerOffset]);
 
   useEffect(() => {
     if (paused) return;
@@ -104,12 +107,12 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
   function goTo(centerIdx: number) {
     if (lockedRef.current) return;
     if (resetTimer.current) clearTimeout(resetTimer.current);
-    const target = (centerIdx - 1 + n) % n;
+    const target = ((centerIdx - centerOffset) % n + n) % n;
     if (posRef.current >= n) snap(posRef.current - n, () => setPos(target));
     else setPos(target);
   }
 
-  const centerSlot = pos + 1;
+  const centerSlot = pos + centerOffset;
   const center = ((centerSlot % n) + n) % n;
 
   const slots = [];
@@ -133,12 +136,12 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
 
   return (
     <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="flex items-center gap-4 sm:gap-6">
+      <div className="flex items-center gap-2 sm:gap-6">
         <button
           type="button"
           aria-label="Previous team member"
           onClick={() => step(-1)}
-          className="glass-pill cursor-hover-target flex size-11 shrink-0 items-center justify-center rounded-full sm:size-12"
+          className="glass-pill cursor-hover-target flex size-9 shrink-0 items-center justify-center rounded-full sm:size-12"
         >
           <ChevronLeft className="size-5" />
         </button>
@@ -210,7 +213,7 @@ export function TeamCarousel({ members }: { members: TeamMember[] }) {
           type="button"
           aria-label="Next team member"
           onClick={() => step(1)}
-          className="glass-pill cursor-hover-target flex size-11 shrink-0 items-center justify-center rounded-full sm:size-12"
+          className="glass-pill cursor-hover-target flex size-9 shrink-0 items-center justify-center rounded-full sm:size-12"
         >
           <ChevronRight className="size-5" />
         </button>

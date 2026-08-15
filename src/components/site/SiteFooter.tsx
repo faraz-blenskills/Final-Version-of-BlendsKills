@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import logoMark from "../../assets/logo-mark.png";
 
@@ -44,6 +44,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/about-us" className="transition-colors hover:text-background">
+                  About Us
+                </Link>
+              </li>
+              <li>
                 <Link to="/services" className="transition-colors hover:text-background">
                   Services
                 </Link>
@@ -78,10 +83,10 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3 text-sm text-background/70">
               <li>
                 <a
-                  href="mailto:info@blendskills.co.in"
+                  href="mailto:support@blendskills.co.in"
                   className="inline-flex items-center gap-2 transition-colors hover:text-background"
                 >
-                  <Mail className="size-4 text-accent" /> info@blendskills.co.in
+                  <Mail className="size-4 text-accent" /> support@blendskills.co.in
                 </a>
               </li>
               <li>
@@ -108,11 +113,29 @@ export function SiteFooter() {
               Social Media
             </p>
             <div className="mt-4 flex gap-2">
-              {[Instagram, Facebook, Linkedin].map((Icon, i) => (
+              {[
+                {
+                  Icon: Instagram,
+                  href: "https://www.instagram.com/blendskills.co/",
+                  label: "BlendSkills on Instagram",
+                },
+                {
+                  Icon: MessageCircle,
+                  href: "https://wa.me/919175789966",
+                  label: "Chat with BlendSkills on WhatsApp",
+                },
+                {
+                  Icon: Linkedin,
+                  href: "https://www.linkedin.com/company/blendskills-pvt-ltd",
+                  label: "BlendSkills on LinkedIn",
+                },
+              ].map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="https://wa.me/919175789966"
-                  aria-label="BlendSkills social profile"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
                   className="rounded-full border border-background/20 p-2.5 text-background transition-colors hover:bg-background/10"
                 >
                   <Icon className="size-4" />
