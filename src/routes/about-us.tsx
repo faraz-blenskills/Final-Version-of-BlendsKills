@@ -220,8 +220,8 @@ function AboutUsPage() {
                   digital marketing and web development company in Pune, Maharashtra
                 </span>
                 , helping businesses grow with innovative marketing strategies, creative
-                branding, and powerful technology solutions. With a strong presence in{" "}
-                <span className="font-medium text-foreground">Pune and Gaya, Bihar</span>, we
+                branding, and powerful technology solutions. With a strong presence{" "}
+                <span className="font-medium text-foreground">across Pan India</span>, we
                 specialize in SEO, social media marketing, website development, software
                 solutions, and performance-driven digital campaigns tailored for startups, local
                 businesses, and growing brands.
