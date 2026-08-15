@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { value: "21+", label: "Years of experience on digital marketing services" },
+  { value: "8+", label: "Years of experience on digital marketing services" },
   { value: "95%", label: "Improved projects delivered for growing brands" },
   { value: "80%", label: "New projects won through referral and results" },
   { value: "100+", label: "Brands partnered across Pune, Gaya and beyond" },
@@ -260,11 +260,14 @@ function Index() {
                   +91 9175789966
                 </a>
                 <a
-                  href="mailto:info@blendskills.co.in"
+                  href="mailto:support@blendskills.co.in"
                   className="cursor-hover-target mt-1 block text-sm text-background/70"
                 >
-                  info@blendskills.co.in
+                  support@blendskills.co.in
                 </a>
+                <p className="eyebrow mt-2 text-background/70 lg:justify-end">
+                  Blendskills Private Limited
+                </p>
               </div>
             </div>
           </div>
@@ -319,8 +322,8 @@ function Index() {
 
       {/* ---------------- SERVICES CAROUSEL ---------------- */}
       <section className="bg-paper text-paper-foreground">
-        <div className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8">
-          <Reveal className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+          <Reveal className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
             <div className="flex flex-col">
               <h2 className="display-lg">
                 How we
@@ -345,7 +348,7 @@ function Index() {
               muted
               loop
               playsInline
-              className="aspect-square w-full rounded-[40px] object-cover lg:aspect-auto lg:h-full"
+              className="aspect-square w-full rounded-[40px] object-cover"
             />
           </Reveal>
         </div>
