@@ -252,7 +252,7 @@ function Index() {
               </div>
 
               <div data-hero-contact className="shrink-0 opacity-0 lg:text-right">
-                <p className="eyebrow text-background/70">Pune | Gaya, India</p>
+                <p className="eyebrow text-background/70 before:content-none">Pune | Gaya, India</p>
                 <a
                   href="tel:+919175789966"
                   className="cursor-hover-target mt-2 block font-display text-lg tracking-tight"
@@ -265,7 +265,7 @@ function Index() {
                 >
                   support@blendskills.co.in
                 </a>
-                <p className="eyebrow mt-2 text-background/70 lg:justify-end">
+                <p className="eyebrow mt-2 text-background/70 before:content-none">
                   Blendskills Private Limited
                 </p>
               </div>
