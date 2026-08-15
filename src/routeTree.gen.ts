@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 
@@ -30,6 +31,11 @@ const ContactUsRoute = ContactUsRouteImport.update({
   path: '/contact-us',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact-us': typeof ContactUsRoute
+  '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact-us': typeof ContactUsRoute
+  '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
@@ -60,20 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact-us': typeof ContactUsRoute
+  '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about-us' | '/contact-us' | '/services' | '/terms-and-conditions'
+    | '/'
+    | '/about-us'
+    | '/contact-us'
+    | '/portfolio'
+    | '/services'
+    | '/terms-and-conditions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about-us' | '/contact-us' | '/services' | '/terms-and-conditions'
+  to:
+    | '/'
+    | '/about-us'
+    | '/contact-us'
+    | '/portfolio'
+    | '/services'
+    | '/terms-and-conditions'
   id:
     | '__root__'
     | '/'
     | '/about-us'
     | '/contact-us'
+    | '/portfolio'
     | '/services'
     | '/terms-and-conditions'
   fileRoutesById: FileRoutesById
@@ -82,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
   ContactUsRoute: typeof ContactUsRoute
+  PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
 }
@@ -109,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactUsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -130,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
   ContactUsRoute: ContactUsRoute,
+  PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
 }

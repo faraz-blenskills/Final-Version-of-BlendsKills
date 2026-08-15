@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export type ImmersiveServiceItem = {
@@ -10,6 +11,7 @@ export type ImmersiveServiceItem = {
   img: string;
   video?: string;
   modalBg: string;
+  secondaryCta?: { label: string; to: string };
 };
 
 function lerp(a: number, b: number, f: number) {
@@ -174,7 +176,9 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
               >
                 <div
                   className={`group flex size-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface shadow-[var(--shadow-feature)] transition-[transform,box-shadow] duration-300 ${
-                    isActive ? "hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,0.35)]" : ""
+                    isActive
+                      ? "hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,0.35)]"
+                      : ""
                   }`}
                 >
                   <div
@@ -350,6 +354,12 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
                 Get a Free Consultation
                 <ArrowUpRight className="size-4" />
               </a>
+              {openItem.secondaryCta && (
+                <Link to={openItem.secondaryCta.to} className="btn-secondary self-start">
+                  {openItem.secondaryCta.label}
+                  <ArrowUpRight className="size-4" />
+                </Link>
+              )}
               <p className="text-xs text-foreground">Terms and conditions apply.</p>
             </div>
           </div>
