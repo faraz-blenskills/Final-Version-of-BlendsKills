@@ -94,7 +94,7 @@ const steps = [
 ];
 
 const proofStats = [
-  { value: "2.7k", label: "Positive reviews from happy clients" },
+  { value: "4.8", label: "Average Rating" },
   { value: "95%", label: "Client satisfaction across every project" },
   { value: "85%", label: "Average business growth rate delivered" },
 ];
@@ -144,32 +144,39 @@ const testimonials = [
   {
     quote:
       "Working with BlendSkills has been a game-changer for our brand. Their data-driven marketing approach and technical expertise helped us scale faster and achieve measurable digital success.",
-    name: "Sophia Lewis",
-    role: "Founder",
+    name: "Propel Stay",
+    role: "Founder: Rakhi Shrivastava",
   },
   {
     quote:
       "BlendSkills helped us build a strong digital identity with creative branding, website development, and targeted marketing campaigns. Their dedicated support and growth-focused strategies delivered outstanding results for our business.",
-    name: "James Peterson",
-    role: "COO, BrightWave",
+    name: "Life Time Memories",
+    role: "Founder: Sagar",
   },
   {
     quote:
       "BlendSkills transformed our online presence with powerful branding and performance marketing strategies. Their professional approach and creative execution helped us generate quality leads and significantly boost our business growth.",
-    name: "Emma Richard",
-    role: "CEO, Nexatech",
+    name: "Edu-Tech Master Academy (Website & LMS)",
+    role: "Founder: Abhishekh Dubey",
   },
   {
     quote:
       "The team at BlendSkills delivered exactly what our business needed, from website development to social media marketing. Their SEO-focused strategies helped us improve visibility and attract the right audience.",
-    name: "David Mont",
-    role: "Marketing Director",
+    name: "Toy World",
+    role: "Founder: Murtuza Poonawalla",
   },
 ];
 
 function AboutUsPage() {
   return (
     <>
+      {/* Sits beside the site logo (rendered separately, top-left, scrolls with the page). */}
+      <div className="absolute left-[96px] top-6 z-40 hidden h-11 items-center sm:left-[120px] sm:flex">
+        <p className="font-display text-xs font-semibold uppercase tracking-wide text-foreground sm:text-sm">
+          Blendskills Private Limited
+        </p>
+      </div>
+
       {/* ---------------- HERO / WHO WE ARE ---------------- */}
       <section className="mx-auto max-w-[1400px] px-5 pb-16 pt-40 sm:px-8">
         <p className="eyebrow">
@@ -189,7 +196,7 @@ function AboutUsPage() {
             />
             <div className="card-soft mt-6 bg-foreground p-8 text-background">
               <CountUp
-                value="21+"
+                value="8+"
                 className="font-display text-5xl font-medium tracking-tight sm:text-6xl"
               />
               <p className="mt-3 max-w-[16rem] text-sm text-background/70">
@@ -213,8 +220,8 @@ function AboutUsPage() {
                   digital marketing and web development company in Pune, Maharashtra
                 </span>
                 , helping businesses grow with innovative marketing strategies, creative
-                branding, and powerful technology solutions. With a strong presence in{" "}
-                <span className="font-medium text-foreground">Pune and Gaya, Bihar</span>, we
+                branding, and powerful technology solutions. With a strong presence{" "}
+                <span className="font-medium text-foreground">across Pan India</span>, we
                 specialize in SEO, social media marketing, website development, software
                 solutions, and performance-driven digital campaigns tailored for startups, local
                 businesses, and growing brands.

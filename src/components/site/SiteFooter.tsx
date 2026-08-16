@@ -25,7 +25,7 @@ export function SiteFooter() {
             <div className="flex items-center gap-2.5">
               <img src={logoMark} alt="" className="h-8 w-auto" />
               <p className="font-display text-xl font-medium text-background">
-                BLENDSKILLS<sup className="ml-0.5 text-[0.6em] text-accent">®</sup>
+                BLENDSKILLS<sup className="ml-0.5 text-[0.9em] text-accent">®</sup>
               </p>
             </div>
             <p className="mt-5 max-w-sm text-sm font-[450] text-background/70">
@@ -145,14 +145,11 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-background/15 pt-6 text-xs text-background/50 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <p>© 2026 BlendSkills | All Rights Reserved.</p>
-            <p>Blendskills Pvt Ltd: "Your Digital Growth Partner"</p>
-          </div>
+        <div className="mt-14 flex flex-col items-center gap-4 border-t border-background/15 pt-6 text-center text-background/50">
+          <p className="text-sm">© 2026 BlendSkills | All Rights Reserved.</p>
           <Link
             to="/terms-and-conditions"
-            className="cursor-hover-target inline-flex w-fit items-center rounded-full border border-background/20 px-4 py-2 text-xs font-medium text-background transition-colors hover:bg-background/10"
+            className="cursor-hover-target inline-flex w-fit items-center rounded-full border border-background/20 px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-background/10"
           >
             Terms &amp; Conditions
           </Link>
