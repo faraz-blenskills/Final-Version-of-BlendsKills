@@ -99,7 +99,8 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
     }
   };
 
-  const cardW = clamp(width * 0.32, 260, 380);
+  const isCompact = width < 640;
+  const cardW = clamp(width * (isCompact ? 0.62 : 0.32), isCompact ? 190 : 260, 380);
   const cardH = cardW * 1.5;
   const offset = cardW * 0.62;
 
@@ -132,7 +133,7 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
           onKeyDown={onKeyDown}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="relative h-[66vh] min-h-[500px] max-h-[780px] flex-1 outline-none"
+          className="relative h-[66vh] min-h-[380px] max-h-[780px] flex-1 overflow-hidden outline-none sm:min-h-[500px]"
         >
           {items.map((item, i) => {
             let raw = (i - activeIndex) % N;
@@ -299,8 +300,7 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            data-lenis-prevent
-            className="no-scrollbar relative max-h-[94vh] w-[80vw] max-w-4xl overflow-y-auto overscroll-contain rounded-[40px] shadow-[var(--shadow-feature)]"
+            className="relative max-h-[94vh] w-[80vw] max-w-4xl overflow-hidden rounded-[40px] shadow-[var(--shadow-feature)]"
           >
             <div className="absolute inset-0 overflow-hidden rounded-[40px] bg-surface">
               {openItem.video ? (
@@ -332,35 +332,40 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
               <X className="size-4" />
             </button>
 
-            <div className="relative flex flex-col gap-5 p-8 pt-20 text-foreground sm:p-14 sm:pt-16">
-              <h3 className="display-xl">{openItem.title}</h3>
-              <p className="text-lg leading-relaxed text-foreground">{openItem.provide}</p>
-              <div className="flex flex-wrap gap-2">
-                {openItem.capabilities.map((c) => (
-                  <span
-                    key={c}
-                    className="rounded-full border border-foreground/15 bg-muted px-3 py-1.5 text-xs font-medium text-foreground/80"
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
-              <a
-                href={whatsappLink(openItem.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary self-start"
-              >
-                Get a Free Consultation
-                <ArrowUpRight className="size-4" />
-              </a>
-              {openItem.secondaryCta && (
-                <Link to={openItem.secondaryCta.to} className="btn-secondary self-start">
-                  {openItem.secondaryCta.label}
+            <div
+              data-lenis-prevent
+              className="no-scrollbar relative max-h-[94vh] overflow-y-auto overscroll-contain"
+            >
+              <div className="relative flex flex-col gap-5 p-8 pt-20 text-foreground sm:p-14 sm:pt-16">
+                <h3 className="display-xl">{openItem.title}</h3>
+                <p className="text-lg leading-relaxed text-foreground">{openItem.provide}</p>
+                <div className="flex flex-wrap gap-2">
+                  {openItem.capabilities.map((c) => (
+                    <span
+                      key={c}
+                      className="rounded-full border border-foreground/15 bg-muted px-3 py-1.5 text-xs font-medium text-foreground/80"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={whatsappLink(openItem.title)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary self-start"
+                >
+                  Get a Free Consultation
                   <ArrowUpRight className="size-4" />
-                </Link>
-              )}
-              <p className="text-xs text-foreground">Terms and conditions apply.</p>
+                </a>
+                {openItem.secondaryCta && (
+                  <Link to={openItem.secondaryCta.to} className="btn-secondary self-start">
+                    {openItem.secondaryCta.label}
+                    <ArrowUpRight className="size-4" />
+                  </Link>
+                )}
+                <p className="text-xs text-foreground">T&C Applies</p>
+              </div>
             </div>
           </div>
         </div>
