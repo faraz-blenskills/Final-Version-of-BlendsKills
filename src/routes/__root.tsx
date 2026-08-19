@@ -15,6 +15,33 @@ import { SiteNav } from "../components/site/SiteNav";
 import { SiteFooter } from "../components/site/SiteFooter";
 import { SmoothScroll } from "../components/site/SmoothScroll";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+// The Meta Pixel base code only fires a PageView for the first document
+// load. This app navigates client-side after that (no full page reload),
+// so without this, Meta only ever sees a single PageView no matter how
+// many pages a visitor browses. Fire one on every resolved route change.
+function useMetaPixelPageViews() {
+  const router = useRouter();
+
+  useEffect(() => {
+    let isFirstResolve = true;
+    const unsubscribe = router.subscribe("onResolved", (event) => {
+      if (isFirstResolve) {
+        isFirstResolve = false;
+        return;
+      }
+      if (!event.pathChanged) return;
+      window.fbq?.("track", "PageView");
+    });
+    return unsubscribe;
+  }, [router]);
+}
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -159,6 +186,7 @@ fbq('track', 'PageView');`,
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useMetaPixelPageViews();
 
   return (
     <QueryClientProvider client={queryClient}>
