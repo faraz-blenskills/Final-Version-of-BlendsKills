@@ -11,6 +11,13 @@ const links = [
   { to: "/contact-us", label: "Contact Us" },
 ] as const;
 
+// Fires a Meta Pixel custom event for nav-tab clicks. Wired directly in code
+// instead of via Meta's Event Setup Tool picker, since that tool's overlay
+// hides fixed-position elements like this nav while it's active.
+function trackNavClick(tabName: string) {
+  window.fbq?.("trackCustom", "NavigationClick", { tab_name: tabName });
+}
+
 export function SiteNav() {
   const [open, setOpen] = useState(false);
 
@@ -34,6 +41,7 @@ export function SiteNav() {
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
                 activeProps={{ className: "bg-white/80 shadow-[0_1px_6px_rgba(0,0,0,0.1)] text-foreground" }}
+                onClick={() => trackNavClick(l.label)}
                 className="rounded-full px-4 py-2 text-sm text-foreground/85 transition-colors hover:text-foreground"
               >
                 {l.label}
@@ -65,7 +73,10 @@ export function SiteNav() {
               <Link
                 key={l.to}
                 to={l.to}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  trackNavClick(l.label);
+                  setOpen(false);
+                }}
                 className="block rounded-xl px-4 py-3 text-base"
               >
                 {l.label}
