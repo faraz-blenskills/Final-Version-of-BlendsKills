@@ -65,6 +65,7 @@ const services: ImmersiveServiceItem[] = [
     img: performanceMarketing,
     video: performanceMarketingVideo,
     modalBg: performanceMarketingBg,
+    secondaryCta: { label: "Visit Our Portfolio", to: "/portfolio" },
   },
   {
     num: "02",
@@ -106,6 +107,7 @@ const services: ImmersiveServiceItem[] = [
     img: brandingCreativeDesign,
     video: brandingCreativeDesignVideo,
     modalBg: brandingCreativeDesignBg,
+    secondaryCta: { label: "Visit Our Portfolio", to: "/portfolio" },
   },
   {
     num: "04",
@@ -125,6 +127,7 @@ const services: ImmersiveServiceItem[] = [
     img: aiBusinessAutomation,
     video: aiBusinessAutomationVideo,
     modalBg: aiBusinessAutomationBg,
+    secondaryCta: { label: "Visit Our Portfolio", to: "/portfolio" },
   },
   {
     num: "05",
@@ -144,6 +147,7 @@ const services: ImmersiveServiceItem[] = [
     img: seoSocialMediaGrowth,
     video: seoSocialMediaGrowthVideo,
     modalBg: seoSocialMediaGrowthBg,
+    secondaryCta: { label: "Visit Our Portfolio", to: "/portfolio" },
   },
   {
     num: "06",
@@ -163,6 +167,7 @@ const services: ImmersiveServiceItem[] = [
     img: videoProductionContentCreation,
     video: videoProductionContentCreationVideo,
     modalBg: videoProductionContentCreationBg,
+    secondaryCta: { label: "Visit Our Portfolio", to: "/portfolio" },
   },
 ];
 
