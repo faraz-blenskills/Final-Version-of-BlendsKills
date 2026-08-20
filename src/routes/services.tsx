@@ -24,6 +24,9 @@ import seoSocialMediaGrowthBg from "../assets/services/modal-bg/05-seo-social-me
 import videoProductionContentCreationBg from "../assets/services/modal-bg/06-video-production-content-creation.webp";
 
 export const Route = createFileRoute("/services")({
+  validateSearch: (search: Record<string, unknown>): { open?: string | undefined } => ({
+    open: typeof search["open"] === "string" ? search["open"] : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Our Services: Performance Marketing, Web & AI | BlendSkills" },
@@ -48,6 +51,7 @@ export const Route = createFileRoute("/services")({
 const services: ImmersiveServiceItem[] = [
   {
     num: "01",
+    slug: "performance-marketing",
     title: "Performance Marketing",
     desc: "Turn advertising into measurable growth with data-driven Meta, Google & LinkedIn campaigns, built for leads and ROI, not just clicks.",
     provide:
@@ -65,10 +69,11 @@ const services: ImmersiveServiceItem[] = [
     img: performanceMarketing,
     video: performanceMarketingVideo,
     modalBg: performanceMarketingBg,
-    secondaryCta: { label: "Visit Our Portfolio", to: "/portfolio" },
+    secondaryCta: { label: "Visit Our Portfolio", to: "/performance-marketing-results" },
   },
   {
     num: "02",
+    slug: "website-app-development",
     title: "Website & App Development",
     desc: "Fast, responsive websites and mobile apps engineered to represent your brand, convert visitors, and run your business.",
     provide:
@@ -90,6 +95,7 @@ const services: ImmersiveServiceItem[] = [
   },
   {
     num: "03",
+    slug: "branding-creative-design",
     title: "Branding & Creative Design",
     desc: "Build a memorable brand through strategic identity, compelling visual design, and a consistent creative language across every touchpoint.",
     provide:
@@ -111,6 +117,7 @@ const services: ImmersiveServiceItem[] = [
   },
   {
     num: "04",
+    slug: "ai-business-automation",
     title: "AI & Business Automation",
     desc: "Make your business smarter with AI-powered automation, intelligent assistants, predictive systems, and AI-driven workflows.",
     provide:
@@ -131,6 +138,7 @@ const services: ImmersiveServiceItem[] = [
   },
   {
     num: "05",
+    slug: "seo-social-media-growth",
     title: "SEO & Social Media Growth",
     desc: "Grow your digital presence through search, content, and social: strategic organic growth backed by data, not guesswork.",
     provide:
@@ -151,6 +159,7 @@ const services: ImmersiveServiceItem[] = [
   },
   {
     num: "06",
+    slug: "video-production-content-creation",
     title: "Video Production & Content Creation",
     desc: "Produce engaging video and visual content that captures attention and drives action, from concept to final edit.",
     provide:
@@ -172,5 +181,6 @@ const services: ImmersiveServiceItem[] = [
 ];
 
 function ServicesPage() {
-  return <ImmersiveServiceCarousel items={services} />;
+  const { open } = Route.useSearch();
+  return <ImmersiveServiceCarousel items={services} initialOpenSlug={open} />;
 }

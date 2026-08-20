@@ -4,6 +4,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export type ImmersiveServiceItem = {
   num: string;
+  slug: string;
   title: string;
   desc: string;
   provide: string;
@@ -49,7 +50,13 @@ const whatsappLink = (service: string) =>
 
 const AUTOPLAY_MS = 4200;
 
-export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceItem[] }) {
+export function ImmersiveServiceCarousel({
+  items,
+  initialOpenSlug,
+}: {
+  items: ImmersiveServiceItem[];
+  initialOpenSlug?: string | undefined;
+}) {
   const stageRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
   const [width, setWidth] = useState(1000);
@@ -57,6 +64,15 @@ export function ImmersiveServiceCarousel({ items }: { items: ImmersiveServiceIte
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isPaused, setIsPaused] = useState(false);
   const N = items.length;
+
+  useEffect(() => {
+    if (!initialOpenSlug) return;
+    const idx = items.findIndex((item) => item.slug === initialOpenSlug);
+    if (idx === -1) return;
+    setActiveIndex(idx);
+    setOpenIndex(idx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialOpenSlug]);
 
   useEffect(() => {
     const el = stageRef.current;
