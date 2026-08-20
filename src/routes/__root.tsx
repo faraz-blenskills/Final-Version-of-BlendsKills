@@ -18,7 +18,26 @@ import { SmoothScroll } from "../components/site/SmoothScroll";
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
+    __lenis?: { scrollTo: (target: number | string, options?: { immediate?: boolean }) => void };
   }
+}
+
+// Lenis owns the page's effective scroll position independently of the
+// native scrollTop, so TanStack Router's built-in scrollRestoration alone
+// can't reset it: navigating to a new page kept whatever scroll position
+// (e.g. the footer) the previous page was left at. Reset both on every
+// route change. Kept fully separate from the pixel-tracking hook below.
+function useScrollResetOnNavigate() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = router.subscribe("onResolved", (event) => {
+      if (!event.pathChanged) return;
+      window.__lenis?.scrollTo(0, { immediate: true });
+      window.scrollTo(0, 0);
+    });
+    return unsubscribe;
+  }, [router]);
 }
 
 // The Meta Pixel base code only fires a PageView for the first document
@@ -188,6 +207,7 @@ fbq('track', 'PageView');`,
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   useMetaPixelPageViews();
+  useScrollResetOnNavigate();
 
   return (
     <QueryClientProvider client={queryClient}>
