@@ -110,20 +110,20 @@ const testimonials = [
   {
     quote:
       "BlendSkills rebuilt our funnel from the ground up. Leads tripled in three months and the cost per acquisition dropped by half.",
-    name: "Rohit S.",
-    role: "Founder, Jobizza",
+    name: "Zypher",
+    role: "Founder: Rohan Juriasinghani",
   },
   {
     quote:
       "Their team understood our brand instantly. The website is fast, beautiful, and finally converts the traffic we were paying for.",
-    name: "Priya M.",
-    role: "Marketing Head, Hospitality Group",
+    name: "Jobizza",
+    role: "Founder: Gaurav Sharma",
   },
   {
     quote:
       "Transparent reporting, sharp creative, real accountability. BlendSkills feels like an in-house team, not a vendor.",
-    name: "Amit K.",
-    role: "Director, Retail Chain",
+    name: "Vibrant HR (Event)",
+    role: "Founding President: Shankar Salunkhe",
   },
 ];
 
