@@ -215,7 +215,7 @@ function ContactPage() {
                       required
                       value={form.name}
                       onChange={(e) => update("name", e.target.value)}
-                      placeholder="Jane Doe"
+                      placeholder="Full Name"
                       className="h-12 rounded-[16px] bg-card"
                     />
                   </div>
@@ -230,7 +230,7 @@ function ContactPage() {
                       required
                       value={form.email}
                       onChange={(e) => update("email", e.target.value)}
-                      placeholder="jane@company.com"
+                      placeholder="yourname@gmail.com"
                       className="h-12 rounded-[16px] bg-card"
                     />
                   </div>
@@ -244,7 +244,7 @@ function ContactPage() {
                       type="tel"
                       value={form.phone}
                       onChange={(e) => update("phone", e.target.value)}
-                      placeholder="+91 90000 00000"
+                      placeholder="+91"
                       className="h-12 rounded-[16px] bg-card"
                     />
                   </div>
@@ -303,8 +303,8 @@ function ContactPage() {
             <div className="flex flex-col gap-6">
               <Reveal delay={0.08} className="grid grid-cols-2 gap-4">
                 {[
-                  { value: "21+", label: "Years driving digital growth", Icon: Clock },
-                  { value: "100+", label: "Brands partnered so far", Icon: Users },
+                  { value: "8+", label: "Years driving digital growth", Icon: Clock },
+                  { value: "25+", label: "Brands partnered so far", Icon: Users },
                 ].map(({ value, label, Icon }) => (
                   <div key={label} className="card-soft bg-foreground p-6 text-background">
                     <Icon className="size-5 text-accent" />
