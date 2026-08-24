@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
+import { Route as PerformanceMarketingResultsRouteImport } from './routes/performance-marketing-results'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
@@ -31,6 +32,12 @@ const ContactUsRoute = ContactUsRouteImport.update({
   path: '/contact-us',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PerformanceMarketingResultsRoute =
+  PerformanceMarketingResultsRouteImport.update({
+    id: '/performance-marketing-results',
+    path: '/performance-marketing-results',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact-us': typeof ContactUsRoute
+  '/performance-marketing-results': typeof PerformanceMarketingResultsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -59,6 +67,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact-us': typeof ContactUsRoute
+  '/performance-marketing-results': typeof PerformanceMarketingResultsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -68,6 +77,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
   '/contact-us': typeof ContactUsRoute
+  '/performance-marketing-results': typeof PerformanceMarketingResultsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
@@ -78,6 +88,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about-us'
     | '/contact-us'
+    | '/performance-marketing-results'
     | '/portfolio'
     | '/services'
     | '/terms-and-conditions'
@@ -86,6 +97,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about-us'
     | '/contact-us'
+    | '/performance-marketing-results'
     | '/portfolio'
     | '/services'
     | '/terms-and-conditions'
@@ -94,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about-us'
     | '/contact-us'
+    | '/performance-marketing-results'
     | '/portfolio'
     | '/services'
     | '/terms-and-conditions'
@@ -103,6 +116,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
   ContactUsRoute: typeof ContactUsRoute
+  PerformanceMarketingResultsRoute: typeof PerformanceMarketingResultsRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
@@ -129,6 +143,13 @@ declare module '@tanstack/react-router' {
       path: '/contact-us'
       fullPath: '/contact-us'
       preLoaderRoute: typeof ContactUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/performance-marketing-results': {
+      id: '/performance-marketing-results'
+      path: '/performance-marketing-results'
+      fullPath: '/performance-marketing-results'
+      preLoaderRoute: typeof PerformanceMarketingResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio': {
@@ -159,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
   ContactUsRoute: ContactUsRoute,
+  PerformanceMarketingResultsRoute: PerformanceMarketingResultsRoute,
   PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,

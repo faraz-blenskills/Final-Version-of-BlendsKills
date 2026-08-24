@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent } from "react";
-import { Link } from "@tanstack/react-router";
 
 export type ArcCarouselItem = {
   title: string;
@@ -60,14 +59,10 @@ export function ArcImageCarousel({
   items,
   title,
   subtitle,
-  ctaLabel,
-  ctaTo,
 }: {
   items: ArcCarouselItem[];
   title: string;
   subtitle: string;
-  ctaLabel: string;
-  ctaTo: string;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState(0);
@@ -337,9 +332,6 @@ export function ArcImageCarousel({
       <div className="absolute inset-x-0 flex flex-col items-center gap-4 px-6" style={{ top: contentTop }}>
         <h2 className="display-lg w-full max-w-lg text-center">{title}</h2>
         <p className="max-w-md text-center text-base leading-relaxed text-paper-muted">{subtitle}</p>
-        <Link to={ctaTo} className="btn-primary mt-1">
-          {ctaLabel}
-        </Link>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-7 flex justify-center gap-2">

@@ -4,12 +4,12 @@ import { Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-
 import logoMark from "../../assets/logo-mark.png";
 
 const services = [
-  "Performance Marketing",
-  "Website & App Development",
-  "Branding & Creative Design",
-  "AI & Business Automation",
-  "SEO & Social Media Growth",
-  "Video Production & Content Creation",
+  { label: "Performance Marketing", slug: "performance-marketing" },
+  { label: "Website & App Development", slug: "website-app-development" },
+  { label: "Branding & Creative Design", slug: "branding-creative-design" },
+  { label: "AI & Business Automation", slug: "ai-business-automation" },
+  { label: "SEO & Social Media Growth", slug: "seo-social-media-growth" },
+  { label: "Video Production & Content Creation", slug: "video-production-content-creation" },
 ];
 
 export function SiteFooter() {
@@ -67,9 +67,13 @@ export function SiteFooter() {
             </p>
             <ul className="mt-5 space-y-3 text-sm text-background/70">
               {services.map((s) => (
-                <li key={s}>
-                  <Link to="/services" className="transition-colors hover:text-background">
-                    {s}
+                <li key={s.slug}>
+                  <Link
+                    to="/services"
+                    search={{ open: s.slug }}
+                    className="transition-colors hover:text-background"
+                  >
+                    {s.label}
                   </Link>
                 </li>
               ))}
