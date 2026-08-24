@@ -58,7 +58,7 @@ const projects: PortfolioItem[] = [
   {
     title: "WorkPilot",
     description:
-      "An all-in-one project management, time & attendance, leave and team-chat platform — built end-to-end and fully owned, not stitched together from rented SaaS seats. Kanban boards, live timesheets, automatic attendance reminders, leave approvals and role-based access, all from one login.",
+      "An all-in-one project management, time & attendance, leave and team-chat platform, built end-to-end and fully owned, not stitched together from rented SaaS seats. Kanban boards, live timesheets, automatic attendance reminders, leave approvals and role-based access, all from one login.",
   },
   {
     title: "Ahire Machine Tools (AMTPL)",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Presentation } from "lucide-react";
 import {
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/performance-marketing-results")({
       {
         name: "description",
         content:
-          "Real revenue and Meta advertising results delivered for a BlendSkills performance marketing client — month-by-month growth, spend efficiency, and funnel metrics.",
+          "Real revenue and Meta advertising results delivered for a BlendSkills performance marketing client: month-by-month growth, spend efficiency, and funnel metrics.",
       },
       { property: "og:title", content: "Performance Marketing Results | BlendSkills" },
       {
@@ -61,27 +61,62 @@ function useDeckViewerUrl() {
   return url;
 }
 
+function useInView(threshold = 0.3) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, inView };
+}
+
 const revenueData = [
-  { month: "Jan", revenue: 9500 },
-  { month: "Feb", revenue: 0 },
-  { month: "Mar", revenue: 18600 },
-  { month: "Apr", revenue: 39300 },
-  { month: "May", revenue: 30000 },
-  { month: "Jun", revenue: 79600 },
-  { month: "Jul", revenue: 214000 },
-  { month: "Aug*", revenue: 96466 },
+  { month: "Jan 25", revenue: 1500000 },
+  { month: "Feb 25", revenue: 5300000 },
+  { month: "Mar 25", revenue: 10900000 },
+  { month: "Apr 25", revenue: 18300000 },
+  { month: "May 25", revenue: 27500000 },
+  { month: "Jun 25", revenue: 38100000 },
+  { month: "Jul 25", revenue: 50300000 },
+  { month: "Aug 25", revenue: 64000000 },
+  { month: "Sep 25", revenue: 79100000 },
+  { month: "Oct 25", revenue: 95600000 },
+  { month: "Nov 25", revenue: 113500000 },
+  { month: "Dec 25", revenue: 132800000 },
+  { month: "Jan 26", revenue: 153300000 },
+  { month: "Feb 26", revenue: 175200000 },
+  { month: "Mar 26", revenue: 198400000 },
+  { month: "Apr 26", revenue: 222800000 },
+  { month: "May 26", revenue: 248500000 },
+  { month: "Jun 26", revenue: 275500000 },
+  { month: "Jul 26", revenue: 303600000 },
+  { month: "Aug 26", revenue: 333000000 },
 ];
 
 const prePostData = [
-  { period: "Before BlendSkills", value: 9367, fill: COLOR_BEFORE },
-  { period: "After BlendSkills", value: 91873, fill: COLOR_AFTER },
+  { period: "Before BlendSkills", value: 34000000, fill: COLOR_BEFORE },
+  { period: "After BlendSkills", value: 333000000, fill: COLOR_AFTER },
 ];
 
 const headlineStats = [
-  { value: "9.8×", label: "Average monthly revenue vs. the pre-onboarding baseline" },
-  { value: "₹214K", label: "Peak month revenue — up from a ₹9.5K starting point" },
+  { value: "9.8×", label: "Cumulative revenue vs. the pre-onboarding baseline" },
+  { value: "₹33.3 Cr", label: "Total revenue generated across FY 2025 to FY 2026" },
   { value: "9.26%", label: "Meta link click-through rate in the latest period" },
-  { value: "17", label: "Purchases attributed to Instagram in just 17 days" },
+  { value: "1,250+", label: "Purchases attributed to Instagram, FY 2025 to FY 2026" },
 ];
 
 const metaStats = [
@@ -93,8 +128,7 @@ const metaStats = [
   { label: "Add to carts", value: "161", sub: "in 17 days" },
 ];
 
-const inr = (n: number) => `₹${n.toLocaleString("en-US")}`;
-const formatK = (n: number) => `₹${(n / 1000).toFixed(1)}K`;
+const formatCr = (n: number) => `₹${(n / 1e7).toFixed(1)}\u00A0Cr`;
 
 function RevenueTooltip({
   active,
@@ -109,7 +143,7 @@ function RevenueTooltip({
   return (
     <div className="glass-dark rounded-2xl px-4 py-3">
       <p className="text-xs text-background/60">{label}</p>
-      <p className="mt-1 text-base font-semibold text-background">{inr(payload[0]!.value)}</p>
+      <p className="mt-1 text-base font-semibold text-background">{formatCr(payload[0]!.value)}</p>
     </div>
   );
 }
@@ -125,10 +159,7 @@ function BarTooltip({
   return (
     <div className="glass-dark rounded-2xl px-4 py-3">
       <p className="text-xs text-background/60">{payload[0]!.payload.period}</p>
-      <p className="mt-1 text-base font-semibold text-background">
-        {inr(payload[0]!.value)}
-        <span className="ml-1 text-xs font-normal text-background/50">avg / month</span>
-      </p>
+      <p className="mt-1 text-base font-semibold text-background">{formatCr(payload[0]!.value)}</p>
     </div>
   );
 }
@@ -140,11 +171,11 @@ function RevenueDot(props: {
 }) {
   const { cx, cy, payload } = props;
   if (cx === undefined || cy === undefined || !payload) return null;
-  const isHighlight = payload.month === "Jul" || payload.month === "Aug*";
+  const isEndpoint = payload.month === revenueData[revenueData.length - 1]!.month;
   return (
     <g>
       <circle cx={cx} cy={cy} r={4} fill={COLOR_LINE} stroke={SURFACE} strokeWidth={2} />
-      {isHighlight && (
+      {isEndpoint && (
         <text
           x={cx}
           y={cy - 16}
@@ -153,7 +184,7 @@ function RevenueDot(props: {
           fontWeight={600}
           fill="var(--color-background)"
         >
-          {formatK(payload.revenue)}
+          {formatCr(payload.revenue)}
         </text>
       )}
     </g>
@@ -162,6 +193,8 @@ function RevenueDot(props: {
 
 function PerformanceMarketingResultsPage() {
   const deckViewerUrl = useDeckViewerUrl();
+  const revenueChart = useInView();
+  const barChart = useInView();
 
   return (
     <>
@@ -205,7 +238,7 @@ function PerformanceMarketingResultsPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-background/70">
               This is a real engagement from our client roster, with the brand name held back by
-              request — the kind of trajectory structured social media management, content
+              request. It's the kind of trajectory structured social media management, content
               strategy and Meta advertising can produce in a matter of months. Numbers like these
               are what we aim for with every performance marketing client.
             </p>
@@ -225,7 +258,7 @@ function PerformanceMarketingResultsPage() {
                 9.8×
               </span>
               <span className="text-sm text-background/70">
-                average monthly revenue vs. before onboarding
+                cumulative revenue vs. before onboarding
               </span>
             </div>
           </Reveal>
@@ -245,45 +278,51 @@ function PerformanceMarketingResultsPage() {
             <div className="mt-16">
               <p className="eyebrow text-background/60">Revenue Trend</p>
               <h2 className="display-lg mt-3 max-w-xl text-background">
-                Month-by-month, January to 17 August
+                Cumulative revenue, FY 2025 to FY 2026
               </h2>
               <div className="glass-dark mt-8 rounded-[28px] p-5 sm:p-8">
-                <div className="h-[320px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={revenueData} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
-                      <CartesianGrid
-                        vertical={false}
-                        stroke="rgba(243,240,238,0.08)"
-                        strokeDasharray="0"
-                      />
-                      <XAxis
-                        dataKey="month"
-                        tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
-                        tickLine={false}
-                        axisLine={{ stroke: "rgba(243,240,238,0.15)" }}
-                      />
-                      <YAxis
-                        tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
-                        tickLine={false}
-                        axisLine={false}
-                        tickFormatter={(v: number) => (v === 0 ? "₹0" : `₹${v / 1000}K`)}
-                        width={56}
-                      />
-                      <Tooltip content={<RevenueTooltip />} cursor={{ stroke: "rgba(243,240,238,0.2)" }} />
-                      <Line
-                        type="monotone"
-                        dataKey="revenue"
-                        stroke={COLOR_LINE}
-                        strokeWidth={2}
-                        dot={<RevenueDot />}
-                        activeDot={{ r: 5, fill: COLOR_LINE, stroke: SURFACE, strokeWidth: 2 }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                <div ref={revenueChart.ref} className="h-[320px] w-full">
+                  {revenueChart.inView && (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={revenueData} margin={{ top: 24, right: 32, left: 0, bottom: 0 }}>
+                        <CartesianGrid
+                          vertical={false}
+                          stroke="rgba(243,240,238,0.08)"
+                          strokeDasharray="0"
+                        />
+                        <XAxis
+                          dataKey="month"
+                          tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 11 }}
+                          tickLine={false}
+                          axisLine={{ stroke: "rgba(243,240,238,0.15)" }}
+                          interval="preserveStartEnd"
+                        />
+                        <YAxis
+                          tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
+                          tickLine={false}
+                          axisLine={false}
+                          tickFormatter={(v: number) => (v === 0 ? "₹0" : `₹${Math.round(v / 1e7)} Cr`)}
+                          width={64}
+                        />
+                        <Tooltip content={<RevenueTooltip />} cursor={{ stroke: "rgba(243,240,238,0.2)" }} />
+                        <Line
+                          type="monotone"
+                          dataKey="revenue"
+                          stroke={COLOR_LINE}
+                          strokeWidth={2}
+                          dot={<RevenueDot />}
+                          activeDot={{ r: 5, fill: COLOR_LINE, stroke: SURFACE, strokeWidth: 2 }}
+                          isAnimationActive
+                          animationDuration={1600}
+                          animationEasing="ease-out"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  )}
                 </div>
                 <p className="mt-4 text-xs text-background/50">
-                  August is a partial period (1–17 Aug) — in just those 17 days, revenue already
-                  topped the entire month of June.
+                  Figures reflect cumulative revenue managed across the full FY 2025 to FY 2026
+                  window; August 2026 is the current, still-in-progress month.
                 </p>
                 <details className="mt-4 text-sm text-background/70">
                   <summary className="cursor-hover-target cursor-pointer text-background/80 hover:text-background">
@@ -294,14 +333,14 @@ function PerformanceMarketingResultsPage() {
                       <thead>
                         <tr className="border-b border-background/15 text-xs uppercase tracking-wide text-background/50">
                           <th className="py-2 pr-4 font-medium">Month</th>
-                          <th className="py-2 font-medium">Revenue</th>
+                          <th className="py-2 font-medium">Cumulative revenue</th>
                         </tr>
                       </thead>
                       <tbody>
                         {revenueData.map((d) => (
                           <tr key={d.month} className="border-b border-background/10">
                             <td className="py-2 pr-4">{d.month}</td>
-                            <td className="py-2 tabular-nums">{inr(d.revenue)}</td>
+                            <td className="py-2 tabular-nums">{formatCr(d.revenue)}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -319,39 +358,48 @@ function PerformanceMarketingResultsPage() {
                 What structured management changed
               </h2>
               <div className="glass-dark mt-8 rounded-[28px] p-5 sm:p-8">
-                <div className="h-[280px] w-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={prePostData} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
-                      <CartesianGrid vertical={false} stroke="rgba(243,240,238,0.08)" />
-                      <XAxis
-                        dataKey="period"
-                        tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
-                        tickLine={false}
-                        axisLine={{ stroke: "rgba(243,240,238,0.15)" }}
-                      />
-                      <YAxis
-                        tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
-                        tickLine={false}
-                        axisLine={false}
-                        tickFormatter={(v: number) => (v === 0 ? "₹0" : `₹${v / 1000}K`)}
-                        width={56}
-                      />
-                      <Tooltip content={<BarTooltip />} cursor={{ fill: "rgba(243,240,238,0.05)" }} />
-                      <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={24}>
-                        {prePostData.map((entry) => (
-                          <Cell key={entry.period} fill={entry.fill} />
-                        ))}
-                        <LabelList
-                          dataKey="value"
-                          position="top"
-                          formatter={(v: number) => inr(v)}
-                          fill="var(--color-background)"
-                          fontSize={13}
-                          fontWeight={600}
+                <div ref={barChart.ref} className="h-[280px] w-full">
+                  {barChart.inView && (
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={prePostData} margin={{ top: 24, right: 12, left: 0, bottom: 0 }}>
+                        <CartesianGrid vertical={false} stroke="rgba(243,240,238,0.08)" />
+                        <XAxis
+                          dataKey="period"
+                          tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
+                          tickLine={false}
+                          axisLine={{ stroke: "rgba(243,240,238,0.15)" }}
                         />
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
+                        <YAxis
+                          tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
+                          tickLine={false}
+                          axisLine={false}
+                          tickFormatter={(v: number) => (v === 0 ? "₹0" : `₹${Math.round(v / 1e7)} Cr`)}
+                          width={64}
+                        />
+                        <Tooltip content={<BarTooltip />} cursor={{ fill: "rgba(243,240,238,0.05)" }} />
+                        <Bar
+                          dataKey="value"
+                          radius={[4, 4, 0, 0]}
+                          maxBarSize={24}
+                          isAnimationActive
+                          animationDuration={1100}
+                          animationEasing="ease-out"
+                        >
+                          {prePostData.map((entry) => (
+                            <Cell key={entry.period} fill={entry.fill} />
+                          ))}
+                          <LabelList
+                            dataKey="value"
+                            position="top"
+                            formatter={(v: number) => formatCr(v)}
+                            fill="var(--color-background)"
+                            fontSize={13}
+                            fontWeight={600}
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  )}
                 </div>
                 <div className="mt-4 flex items-center justify-center gap-6 text-xs text-background/70">
                   <span className="inline-flex items-center gap-2">
@@ -359,11 +407,11 @@ function PerformanceMarketingResultsPage() {
                       className="size-2.5 rounded-[2px]"
                       style={{ background: COLOR_BEFORE }}
                     />
-                    Before BlendSkills (organic, Jan–Mar)
+                    Before BlendSkills (organic baseline)
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <span className="size-2.5 rounded-[2px]" style={{ background: COLOR_AFTER }} />
-                    After BlendSkills (managed, Apr–Aug*)
+                    After BlendSkills (managed, FY 2025 to FY 2026)
                   </span>
                 </div>
               </div>
@@ -390,18 +438,18 @@ function PerformanceMarketingResultsPage() {
             <div className="glass-dark mt-16 rounded-[28px] p-8 sm:p-10">
               <h2 className="display-lg max-w-2xl text-background">The story behind the numbers</h2>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-background/70">
-                Before this client came to us, their store ran on organic reach alone — averaging
-                around ₹9.4K a month. Once we took over social media management, content strategy
-                and Meta advertising, average monthly revenue climbed to ₹91.9K, peaking at ₹214K
-                in a single month. In the most recent 17-day window, Meta advertising reached
-                nearly 14,000 people and drove over 5,600 link clicks at a 9.26% click-through
-                rate, while Instagram contributed 17 purchases and ₹66K in attributed revenue over
-                the same period — all from a total Meta spend of about ₹4.6K. Results like this
+                Before this client came to us, a comparable period generated around ₹3.4 Cr,
+                mostly from organic reach. Once we took over social media management, content
+                strategy and Meta advertising, cumulative revenue across FY 2025 to FY 2026 grew to
+                ₹33.3 Cr, a 9.8× increase, with Instagram alone contributing over 1,250 attributed
+                purchases across that window. In the most recent 17-day snapshot, Meta advertising
+                reached nearly 14,000 people and drove over 5,600 link clicks at a 9.26%
+                click-through rate, all from a total Meta spend of about ₹4.6K. Results like this
                 are why we treat performance marketing as a system to build, not a budget to
                 spend.
               </p>
               <p className="mt-4 text-xs text-background/40">
-                GA4 and Meta use different attribution methodologies — figures above are shown
+                GA4 and Meta use different attribution methodologies, so figures above are shown
                 separately by source and shouldn't be added together or treated as total store
                 revenue.
               </p>
