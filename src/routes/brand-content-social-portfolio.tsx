@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, ChevronRight } from "lucide-react";
 
 import { Reveal } from "../components/site/Reveal";
 
@@ -10,13 +10,13 @@ export const Route = createFileRoute("/brand-content-social-portfolio")({
       {
         name: "description",
         content:
-          "How BlendSkills connects brand identity, video & content production, and social/SEO growth into one system — the full capabilities behind our Branding & Creative Design, Video Production & Content Creation, and SEO & Social Media Growth services.",
+          "How BlendSkills connects brand identity, video & content production, and social/SEO growth into one system. The full capabilities behind our Branding & Creative Design, Video Production & Content Creation, and SEO & Social Media Growth services.",
       },
       { property: "og:title", content: "Branding, Content & Growth Portfolio | BlendSkills" },
       {
         property: "og:description",
         content:
-          "One connected partner for your complete brand and digital growth — identity, content, and organic growth working as a single system.",
+          "One connected partner for your complete brand and digital growth: identity, content, and organic growth working as a single system.",
       },
       { property: "og:url", content: "/brand-content-social-portfolio" },
     ],
@@ -88,7 +88,7 @@ const videoColumns = [
     ],
   },
   {
-    title: "Post-Production",
+    title: "Post Production",
     items: [
       "Video editing",
       "Reels / Shorts",
@@ -110,9 +110,9 @@ const contentFormats = [
   "Ad Creatives",
   "Event Content",
   "Educational",
-  "Founder-led",
+  "Founder Led",
   "Testimonials",
-  "Behind-the-scenes",
+  "Behind The Scenes",
   "Motion Graphics",
   "Social Clips",
 ];
@@ -134,7 +134,7 @@ const socialColumns = [
     items: [
       "Content calendars & captions",
       "Reels, carousels & stories",
-      "Trend-based content",
+      "Trend Based Content",
       "Community engagement",
       "Profile optimization",
       "Publishing coordination",
@@ -157,7 +157,7 @@ const seoColumns = [
     title: "SEO & Local Visibility",
     items: [
       "Keyword research & search intent",
-      "On-page SEO",
+      "On Page SEO",
       "Technical SEO",
       "Content strategy",
       "Local SEO",
@@ -207,10 +207,10 @@ const whyBlendskills = [
   "Strategy before activity",
   "Creative + business thinking",
   "Trend intelligence",
-  "Platform-specific execution",
+  "Platform Specific Execution",
   "Consistent brand communication",
-  "Data-driven improvement",
-  "End-to-end support",
+  "Data Driven Improvement",
+  "End To End Support",
 ];
 
 function SectionHeading({
@@ -252,6 +252,30 @@ function InfoColumns({ columns }: { columns: { title: string; items: string[] }[
           </ul>
         </div>
       ))}
+    </div>
+  );
+}
+
+function FlowDiagram({ steps }: { steps: string[] }) {
+  return (
+    <div className="mt-6 flex flex-wrap items-center gap-y-3">
+      {steps.map((step, i) => {
+        const isLast = i === steps.length - 1;
+        return (
+          <div key={step} className="flex items-center">
+            <span
+              className={
+                isLast
+                  ? "rounded-full bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-accent-foreground"
+                  : "glass-dark rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide text-background/85"
+              }
+            >
+              {step}
+            </span>
+            {!isLast && <ChevronRight className="mx-1 size-4 shrink-0 text-accent" />}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -311,10 +335,11 @@ function BrandContentSocialPortfolioPage() {
               <span className="animate-shimmer-text">Brand &amp; Digital Growth</span>.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-background/70">
-              From building your identity and producing high-impact content to growing your
+              From building your identity and producing high impact content to growing your
               audience and improving search visibility, we connect creative execution with
-              business objectives — the full system behind our Branding &amp; Creative Design,
-              Video Production &amp; Content Creation, and SEO &amp; Social Media Growth services.
+              business objectives. This is the full system behind our Branding &amp; Creative
+              Design, Video Production &amp; Content Creation, and SEO &amp; Social Media Growth
+              services.
             </p>
           </Reveal>
 
@@ -335,7 +360,7 @@ function BrandContentSocialPortfolioPage() {
           {/* ---------------- 01 BRANDING ---------------- */}
           <div className="mt-20">
             <SectionHeading
-              eyebrow="01 — Branding & Creative Solutions"
+              eyebrow="01. Branding & Creative Solutions"
               title="Build a brand people recognize, trust and remember."
             />
             <Reveal delay={0.1}>
@@ -346,7 +371,7 @@ function BrandContentSocialPortfolioPage() {
           {/* ---------------- 02 VIDEO & CONTENT ---------------- */}
           <div className="mt-20">
             <SectionHeading
-              eyebrow="02 — Video Production & Content Creation"
+              eyebrow="02. Video Production & Content Creation"
               title="Turn ideas into visual experiences designed for attention, communication and action."
             />
             <Reveal delay={0.1}>
@@ -361,15 +386,18 @@ function BrandContentSocialPortfolioPage() {
           {/* ---------------- 03 SOCIAL GROWTH ---------------- */}
           <div className="mt-20">
             <SectionHeading
-              eyebrow="03 — Social Media Growth"
-              title="Content → Attention → Engagement → Trust → Community → Growth."
+              eyebrow="03. Social Media Growth"
+              title="Content that earns attention, trust and community."
             />
             <Reveal delay={0.1}>
+              <FlowDiagram steps={["Content", "Attention", "Engagement", "Trust", "Community", "Growth"]} />
+            </Reveal>
+            <Reveal delay={0.15}>
               <InfoColumns columns={socialColumns} />
             </Reveal>
 
             <Reveal delay={0.15}>
-              <p className="mt-10 eyebrow text-background/60">Platform-Specific Support</p>
+              <p className="mt-10 eyebrow text-background/60">Platform Specific Support</p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {platforms.map((p) => (
                   <div key={p.name} className="glass-dark rounded-[20px] p-5">
@@ -389,7 +417,7 @@ function BrandContentSocialPortfolioPage() {
           {/* ---------------- 04 DIGITAL MARKETING & SEO ---------------- */}
           <div className="mt-20">
             <SectionHeading
-              eyebrow="04 — Digital Marketing & SEO"
+              eyebrow="04. Digital Marketing & SEO"
               title="Search visibility and organic growth, built on strategy, not guesswork."
             />
             <Reveal delay={0.1}>
@@ -427,9 +455,10 @@ function BrandContentSocialPortfolioPage() {
                   </div>
                 ))}
               </div>
-              <p className="mt-8 text-sm leading-relaxed text-background/60">
-                Brand → Content → Social → Search → Trust → Engagement → Enquiry → Growth.
-              </p>
+              <p className="mt-8 text-sm text-background/60">The complete growth journey</p>
+              <FlowDiagram
+                steps={["Brand", "Content", "Social", "Search", "Trust", "Engagement", "Enquiry", "Growth"]}
+              />
             </div>
           </Reveal>
         </div>
