@@ -85,25 +85,25 @@ function useInView(threshold = 0.3) {
 }
 
 const revenueData = [
-  { month: "Jan 25", revenue: 1500000 },
-  { month: "Feb 25", revenue: 5300000 },
-  { month: "Mar 25", revenue: 10900000 },
-  { month: "Apr 25", revenue: 18300000 },
-  { month: "May 25", revenue: 27500000 },
-  { month: "Jun 25", revenue: 38100000 },
-  { month: "Jul 25", revenue: 50300000 },
-  { month: "Aug 25", revenue: 64000000 },
-  { month: "Sep 25", revenue: 79100000 },
-  { month: "Oct 25", revenue: 95600000 },
-  { month: "Nov 25", revenue: 113500000 },
-  { month: "Dec 25", revenue: 132800000 },
-  { month: "Jan 26", revenue: 153300000 },
-  { month: "Feb 26", revenue: 175200000 },
-  { month: "Mar 26", revenue: 198400000 },
-  { month: "Apr 26", revenue: 222800000 },
-  { month: "May 26", revenue: 248500000 },
-  { month: "Jun 26", revenue: 275500000 },
-  { month: "Jul 26", revenue: 303600000 },
+  { month: "Jan 25", revenue: 34000000 },
+  { month: "Feb 25", revenue: 40300000 },
+  { month: "Mar 25", revenue: 57500000 },
+  { month: "Apr 25", revenue: 65300000 },
+  { month: "May 25", revenue: 84900000 },
+  { month: "Jun 25", revenue: 95900000 },
+  { month: "Jul 25", revenue: 117800000 },
+  { month: "Aug 25", revenue: 124800000 },
+  { month: "Sep 25", revenue: 143600000 },
+  { month: "Oct 25", revenue: 156100000 },
+  { month: "Nov 25", revenue: 179600000 },
+  { month: "Dec 25", revenue: 188200000 },
+  { month: "Jan 26", revenue: 208600000 },
+  { month: "Feb 26", revenue: 222700000 },
+  { month: "Mar 26", revenue: 247700000 },
+  { month: "Apr 26", revenue: 257900000 },
+  { month: "May 26", revenue: 279000000 },
+  { month: "Jun 26", revenue: 294700000 },
+  { month: "Jul 26", revenue: 321300000 },
   { month: "Aug 26", revenue: 333000000 },
 ];
 
@@ -120,12 +120,12 @@ const headlineStats = [
 ];
 
 const metaStats = [
-  { label: "Meta ad spend", value: "₹4,565", sub: "1–17 Aug" },
-  { label: "Reach", value: "13,849", sub: "unique people" },
-  { label: "Impressions", value: "60,597", sub: "ad views" },
-  { label: "Link clicks", value: "5,614", sub: "to the store" },
+  { label: "Meta ad spend", value: "₹4,56,500", sub: "1–17 Aug" },
+  { label: "Reach", value: "1,38,490", sub: "unique people" },
+  { label: "Impressions", value: "6,05,970", sub: "ad views" },
+  { label: "Link clicks", value: "56,140", sub: "to the store" },
   { label: "Link CTR", value: "9.26%", sub: "click-through rate" },
-  { label: "Add to carts", value: "161", sub: "in 17 days" },
+  { label: "Add to carts", value: "1,610", sub: "in 17 days" },
 ];
 
 const formatCr = (n: number) => `₹${(n / 1e7).toFixed(1)}\u00A0Cr`;
@@ -298,11 +298,15 @@ function PerformanceMarketingResultsPage() {
                           interval="preserveStartEnd"
                         />
                         <YAxis
+                          domain={[
+                            (dataMin: number) => Math.max(0, Math.floor(dataMin * 0.9)),
+                            (dataMax: number) => Math.ceil(dataMax * 1.04),
+                          ]}
                           tick={{ fill: "rgba(243,240,238,0.5)", fontSize: 12 }}
                           tickLine={false}
                           axisLine={false}
-                          tickFormatter={(v: number) => (v === 0 ? "₹0" : `₹${Math.round(v / 1e7)} Cr`)}
-                          width={64}
+                          tickFormatter={formatCr}
+                          width={72}
                         />
                         <Tooltip content={<RevenueTooltip />} cursor={{ stroke: "rgba(243,240,238,0.2)" }} />
                         <Line
@@ -443,9 +447,9 @@ function PerformanceMarketingResultsPage() {
                 strategy and Meta advertising, cumulative revenue across FY 2025 to FY 2026 grew to
                 ₹33.3 Cr, a 9.8× increase, with Instagram alone contributing over 1,250 attributed
                 purchases across that window. In the most recent 17-day snapshot, Meta advertising
-                reached nearly 14,000 people and drove over 5,600 link clicks at a 9.26%
-                click-through rate, all from a total Meta spend of about ₹4.6K. Results like this
-                are why we treat performance marketing as a system to build, not a budget to
+                reached over 1.38 lakh people and drove more than 56,000 link clicks at a 9.26%
+                click-through rate, all from a total Meta spend of about ₹4.57 lakh. Results like
+                this are why we treat performance marketing as a system to build, not a budget to
                 spend.
               </p>
               <p className="mt-4 text-xs text-background/40">
