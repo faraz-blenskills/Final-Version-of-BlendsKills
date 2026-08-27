@@ -86,24 +86,24 @@ function useInView(threshold = 0.3) {
 
 const revenueData = [
   { month: "Jan 25", revenue: 34000000 },
-  { month: "Feb 25", revenue: 40300000 },
-  { month: "Mar 25", revenue: 57500000 },
-  { month: "Apr 25", revenue: 65300000 },
-  { month: "May 25", revenue: 84900000 },
-  { month: "Jun 25", revenue: 95900000 },
-  { month: "Jul 25", revenue: 117800000 },
-  { month: "Aug 25", revenue: 124800000 },
-  { month: "Sep 25", revenue: 143600000 },
-  { month: "Oct 25", revenue: 156100000 },
-  { month: "Nov 25", revenue: 179600000 },
-  { month: "Dec 25", revenue: 188200000 },
-  { month: "Jan 26", revenue: 208600000 },
-  { month: "Feb 26", revenue: 222700000 },
-  { month: "Mar 26", revenue: 247700000 },
-  { month: "Apr 26", revenue: 257900000 },
-  { month: "May 26", revenue: 279000000 },
-  { month: "Jun 26", revenue: 294700000 },
-  { month: "Jul 26", revenue: 321300000 },
+  { month: "Feb 25", revenue: 42000000 },
+  { month: "Mar 25", revenue: 35000000 },
+  { month: "Apr 25", revenue: 50000000 },
+  { month: "May 25", revenue: 68000000 },
+  { month: "Jun 25", revenue: 56000000 },
+  { month: "Jul 25", revenue: 80000000 },
+  { month: "Aug 25", revenue: 97000000 },
+  { month: "Sep 25", revenue: 80000000 },
+  { month: "Oct 25", revenue: 115000000 },
+  { month: "Nov 25", revenue: 140000000 },
+  { month: "Dec 25", revenue: 116000000 },
+  { month: "Jan 26", revenue: 160000000 },
+  { month: "Feb 26", revenue: 195000000 },
+  { month: "Mar 26", revenue: 163000000 },
+  { month: "Apr 26", revenue: 220000000 },
+  { month: "May 26", revenue: 265000000 },
+  { month: "Jun 26", revenue: 223000000 },
+  { month: "Jul 26", revenue: 285000000 },
   { month: "Aug 26", revenue: 333000000 },
 ];
 
@@ -278,7 +278,7 @@ function PerformanceMarketingResultsPage() {
             <div className="mt-16">
               <p className="eyebrow text-background/60">Revenue Trend</p>
               <h2 className="display-lg mt-3 max-w-xl text-background">
-                Cumulative revenue, FY 2025 to FY 2026
+                Revenue performance, FY 2025 to FY 2026
               </h2>
               <div className="glass-dark mt-8 rounded-[28px] p-5 sm:p-8">
                 <div ref={revenueChart.ref} className="h-[320px] w-full">
@@ -325,8 +325,9 @@ function PerformanceMarketingResultsPage() {
                   )}
                 </div>
                 <p className="mt-4 text-xs text-background/50">
-                  Figures reflect cumulative revenue managed across the full FY 2025 to FY 2026
-                  window; August 2026 is the current, still-in-progress month.
+                  Figures reflect revenue managed across the full FY 2025 to FY 2026 window,
+                  including the seasonal dips and rebounds along the way. August 2026 is the
+                  current month, still in progress.
                 </p>
                 <details className="mt-4 text-sm text-background/70">
                   <summary className="cursor-hover-target cursor-pointer text-background/80 hover:text-background">
@@ -337,7 +338,7 @@ function PerformanceMarketingResultsPage() {
                       <thead>
                         <tr className="border-b border-background/15 text-xs uppercase tracking-wide text-background/50">
                           <th className="py-2 pr-4 font-medium">Month</th>
-                          <th className="py-2 font-medium">Cumulative revenue</th>
+                          <th className="py-2 font-medium">Revenue</th>
                         </tr>
                       </thead>
                       <tbody>
