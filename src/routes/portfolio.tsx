@@ -34,10 +34,16 @@ type PortfolioItem = {
   screenshot?: string;
   imagePosition?: string;
   url?: string;
+  status?: string;
+  highlights: string[];
 };
 
-const whatsappHref = (project: string) =>
-  `https://wa.me/919175789966?text=${encodeURIComponent(`Hi BlendSkills! I'd like to book a demo of ${project}.`)}`;
+const whatsappHref = (project: string, inDevelopment: boolean) =>
+  `https://wa.me/919175789966?text=${encodeURIComponent(
+    inDevelopment
+      ? `Hi BlendSkills! I'd like to know more about ${project}.`
+      : `Hi BlendSkills! I'd like to book a demo of ${project}.`,
+  )}`;
 
 const projects: PortfolioItem[] = [
   {
@@ -46,6 +52,7 @@ const projects: PortfolioItem[] = [
       "Authentic sneakers & pre-owned luxury resale marketplace for Gen Z. A fast, mobile-first storefront built to browse, list, and buy verified pieces with confidence.",
     screenshot: hypevaultShot,
     url: "https://aa-one-silk.vercel.app/",
+    highlights: ["Sneaker Marketplace", "Verified Resale", "Mobile-First"],
   },
   {
     title: "Vinee Robot",
@@ -54,11 +61,7 @@ const projects: PortfolioItem[] = [
     screenshot: vineeRobotShot,
     imagePosition: "object-[center_8%]",
     url: "https://vineerobot.com/",
-  },
-  {
-    title: "WorkPilot",
-    description:
-      "An all-in-one project management, time & attendance, leave and team-chat platform, built end-to-end and fully owned, not stitched together from rented SaaS seats. Kanban boards, live timesheets, automatic attendance reminders, leave approvals and role-based access, all from one login.",
+    highlights: ["E-commerce", "Kids' Products", "Product Catalog"],
   },
   {
     title: "Ahire Machine Tools (AMTPL)",
@@ -66,6 +69,7 @@ const projects: PortfolioItem[] = [
       "Drilling machines, vices, and industrial machine tools manufacturer. A corporate site presenting their certified product catalog and manufacturing capabilities to B2B buyers.",
     screenshot: amtplShot,
     url: "https://amtplindia.com/",
+    highlights: ["Industrial Catalog", "B2B", "Corporate Site"],
   },
   {
     title: "Unik Biotech Research",
@@ -73,6 +77,21 @@ const projects: PortfolioItem[] = [
       "Science-driven agri-inputs and soil enhancement solutions. A brand site detailing their research-backed product range for growers and distributors.",
     screenshot: unikBiotechShot,
     url: "https://unik-biotech-alpha.vercel.app/",
+    highlights: ["Agri-Inputs", "Research-Backed", "Distributor Network"],
+  },
+  {
+    title: "WhatsApp CRM",
+    description:
+      "A WhatsApp-native CRM built to manage leads, conversations and follow-ups without ever leaving the chat window. Currently in active development for teams that run their sales process over WhatsApp.",
+    status: "In Development",
+    highlights: ["WhatsApp-Native", "Lead Management", "In-Chat Follow-ups"],
+  },
+  {
+    title: "TalentForge AI",
+    description:
+      "A multi-agent AI recruitment platform that automates resume screening, candidate-job matching, interview scheduling and hiring analytics using NLP, LLMs and RAG. An in-house research build exploring what agentic AI can do for hiring.",
+    status: "In Development",
+    highlights: ["Multi-Agent AI", "Resume Screening", "Hiring Analytics"],
   },
 ];
 
@@ -159,15 +178,25 @@ function PortfolioPage() {
                     ) : (
                       <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
                         <span className="size-1.5 animate-pulse rounded-full bg-accent" />
-                        Available
+                        {p.status ?? "Available"}
                       </span>
                     )}
                   </div>
                   <p className="text-xs leading-relaxed text-muted-foreground">{p.description}</p>
+                  <div className="mt-1 flex flex-wrap gap-1.5">
+                    {p.highlights.map((h) => (
+                      <span
+                        key={h}
+                        className="rounded-full bg-muted px-2 py-0.5 text-[9px] font-medium uppercase tracking-wide text-muted-foreground"
+                      >
+                        {h}
+                      </span>
+                    ))}
+                  </div>
                   {!p.url && (
                     <div className="mt-2 flex gap-2">
                       <a
-                        href={whatsappHref(p.title)}
+                        href={whatsappHref(p.title, !!p.status)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="cursor-hover-target inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-foreground px-3 py-1.5 text-[11px] font-medium text-background transition-opacity hover:opacity-85"

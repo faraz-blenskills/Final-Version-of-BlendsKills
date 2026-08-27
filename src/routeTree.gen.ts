@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutUsRouteImport } from './routes/about-us'
+import { Route as BrandContentSocialPortfolioRouteImport } from './routes/brand-content-social-portfolio'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as PerformanceMarketingResultsRouteImport } from './routes/performance-marketing-results'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as TechnologySoftwarePortfolioRouteImport } from './routes/technology-software-portfolio'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 
 const IndexRoute = IndexRouteImport.update({
@@ -27,6 +29,12 @@ const AboutUsRoute = AboutUsRouteImport.update({
   path: '/about-us',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BrandContentSocialPortfolioRoute =
+  BrandContentSocialPortfolioRouteImport.update({
+    id: '/brand-content-social-portfolio',
+    path: '/brand-content-social-portfolio',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContactUsRoute = ContactUsRouteImport.update({
   id: '/contact-us',
   path: '/contact-us',
@@ -48,6 +56,12 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TechnologySoftwarePortfolioRoute =
+  TechnologySoftwarePortfolioRouteImport.update({
+    id: '/technology-software-portfolio',
+    path: '/technology-software-portfolio',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
   id: '/terms-and-conditions',
   path: '/terms-and-conditions',
@@ -57,29 +71,35 @@ const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/brand-content-social-portfolio': typeof BrandContentSocialPortfolioRoute
   '/contact-us': typeof ContactUsRoute
   '/performance-marketing-results': typeof PerformanceMarketingResultsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
+  '/technology-software-portfolio': typeof TechnologySoftwarePortfolioRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/brand-content-social-portfolio': typeof BrandContentSocialPortfolioRoute
   '/contact-us': typeof ContactUsRoute
   '/performance-marketing-results': typeof PerformanceMarketingResultsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
+  '/technology-software-portfolio': typeof TechnologySoftwarePortfolioRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/brand-content-social-portfolio': typeof BrandContentSocialPortfolioRoute
   '/contact-us': typeof ContactUsRoute
   '/performance-marketing-results': typeof PerformanceMarketingResultsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
+  '/technology-software-portfolio': typeof TechnologySoftwarePortfolioRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
 }
 export interface FileRouteTypes {
@@ -87,38 +107,46 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about-us'
+    | '/brand-content-social-portfolio'
     | '/contact-us'
     | '/performance-marketing-results'
     | '/portfolio'
     | '/services'
+    | '/technology-software-portfolio'
     | '/terms-and-conditions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about-us'
+    | '/brand-content-social-portfolio'
     | '/contact-us'
     | '/performance-marketing-results'
     | '/portfolio'
     | '/services'
+    | '/technology-software-portfolio'
     | '/terms-and-conditions'
   id:
     | '__root__'
     | '/'
     | '/about-us'
+    | '/brand-content-social-portfolio'
     | '/contact-us'
     | '/performance-marketing-results'
     | '/portfolio'
     | '/services'
+    | '/technology-software-portfolio'
     | '/terms-and-conditions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
+  BrandContentSocialPortfolioRoute: typeof BrandContentSocialPortfolioRoute
   ContactUsRoute: typeof ContactUsRoute
   PerformanceMarketingResultsRoute: typeof PerformanceMarketingResultsRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
+  TechnologySoftwarePortfolioRoute: typeof TechnologySoftwarePortfolioRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
 }
 
@@ -136,6 +164,13 @@ declare module '@tanstack/react-router' {
       path: '/about-us'
       fullPath: '/about-us'
       preLoaderRoute: typeof AboutUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brand-content-social-portfolio': {
+      id: '/brand-content-social-portfolio'
+      path: '/brand-content-social-portfolio'
+      fullPath: '/brand-content-social-portfolio'
+      preLoaderRoute: typeof BrandContentSocialPortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact-us': {
@@ -166,6 +201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/technology-software-portfolio': {
+      id: '/technology-software-portfolio'
+      path: '/technology-software-portfolio'
+      fullPath: '/technology-software-portfolio'
+      preLoaderRoute: typeof TechnologySoftwarePortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms-and-conditions': {
       id: '/terms-and-conditions'
       path: '/terms-and-conditions'
@@ -179,10 +221,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
+  BrandContentSocialPortfolioRoute: BrandContentSocialPortfolioRoute,
   ContactUsRoute: ContactUsRoute,
   PerformanceMarketingResultsRoute: PerformanceMarketingResultsRoute,
   PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
+  TechnologySoftwarePortfolioRoute: TechnologySoftwarePortfolioRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
 }
 export const routeTree = rootRouteImport

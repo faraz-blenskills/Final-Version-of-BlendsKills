@@ -1,7 +1,20 @@
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, ChevronRight, Play, X } from "lucide-react";
 
 import { Reveal } from "../components/site/Reveal";
+import reel1 from "../assets/portfolio/reels/reel-1.mp4";
+import reel1Poster from "../assets/portfolio/reels/reel-1.jpg";
+import reel1Full from "../assets/portfolio/reels/reel-1-full.mp4";
+import reel2 from "../assets/portfolio/reels/reel-2.mp4";
+import reel2Poster from "../assets/portfolio/reels/reel-2.jpg";
+import reel2Full from "../assets/portfolio/reels/reel-2-full.mp4";
+import reel3 from "../assets/portfolio/reels/reel-3.mp4";
+import reel3Poster from "../assets/portfolio/reels/reel-3.jpg";
+import reel3Full from "../assets/portfolio/reels/reel-3-full.mp4";
+import reel4 from "../assets/portfolio/reels/reel-4.mp4";
+import reel4Poster from "../assets/portfolio/reels/reel-4.jpg";
+import reel4Full from "../assets/portfolio/reels/reel-4-full.mp4";
 
 export const Route = createFileRoute("/brand-content-social-portfolio")({
   head: () => ({
@@ -100,6 +113,13 @@ const videoColumns = [
       "Platform optimization",
     ],
   },
+];
+
+const reels = [
+  { src: reel1, poster: reel1Poster, full: reel1Full },
+  { src: reel2, poster: reel2Poster, full: reel2Full },
+  { src: reel3, poster: reel3Poster, full: reel3Full },
+  { src: reel4, poster: reel4Poster, full: reel4Full },
 ];
 
 const contentFormats = [
@@ -280,6 +300,149 @@ function FlowDiagram({ steps }: { steps: string[] }) {
   );
 }
 
+function ReelCard({
+  src,
+  poster,
+  onOpen,
+}: {
+  src: string;
+  poster: string;
+  onOpen: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      aria-label="Play video"
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      className="cursor-hover-target group relative aspect-9/16 w-[170px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-background/10 bg-muted sm:w-[200px]"
+      onMouseEnter={() => {
+        void videoRef.current?.play();
+      }}
+      onMouseLeave={() => {
+        const v = videoRef.current;
+        if (v) {
+          v.pause();
+          v.currentTime = 0;
+        }
+      }}
+    >
+      <img
+        src={poster}
+        alt=""
+        draggable={false}
+        className="size-full object-cover transition-opacity duration-300 group-hover:opacity-0"
+      />
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-foreground/0 transition-colors duration-300 group-hover:bg-foreground/25">
+        <span className="flex size-11 items-center justify-center rounded-full bg-background/90 opacity-0 shadow-[var(--shadow-nav)] transition-opacity duration-300 group-hover:opacity-100">
+          <Play className="size-4 translate-x-0.5 fill-foreground text-foreground" />
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function ReelModal({
+  reel,
+  onClose,
+}: {
+  reel: { src: string; poster: string; full: string };
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  return (
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/70 p-4 backdrop-blur-sm"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative aspect-9/16 max-h-[88vh] w-auto overflow-hidden rounded-[28px] bg-black shadow-[var(--shadow-feature)]"
+      >
+        <video
+          key={reel.full}
+          src={reel.full}
+          poster={reel.poster}
+          controls
+          autoPlay
+          playsInline
+          className="h-full max-h-[88vh] w-auto object-contain"
+        />
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={onClose}
+          className="cursor-hover-target absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full border border-foreground/15 bg-surface text-foreground transition-colors hover:bg-muted"
+        >
+          <X className="size-4" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ReelRail() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const openReel = openIndex !== null ? reels[openIndex] : null;
+
+  return (
+    <>
+      <div
+        className="relative mt-8 overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+        }}
+      >
+        <div className="animate-reel-rail flex w-max gap-5">
+          <div className="flex flex-none gap-5">
+            {reels.map((r, i) => (
+              <ReelCard key={i} src={r.src} poster={r.poster} onOpen={() => setOpenIndex(i)} />
+            ))}
+          </div>
+          <div aria-hidden="true" className="flex flex-none gap-5">
+            {reels.map((r, i) => (
+              <ReelCard
+                key={`dup-${i}`}
+                src={r.src}
+                poster={r.poster}
+                onOpen={() => setOpenIndex(i)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {openReel && <ReelModal reel={openReel} onClose={() => setOpenIndex(null)} />}
+    </>
+  );
+}
+
 function TagRow({ tags }: { tags: string[] }) {
   return (
     <div className="mt-6 flex flex-wrap gap-2">
@@ -380,6 +543,10 @@ function BrandContentSocialPortfolioPage() {
             <Reveal delay={0.15}>
               <p className="mt-10 eyebrow text-background/60">Content Formats We Support</p>
               <TagRow tags={contentFormats} />
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="mt-10 eyebrow text-background/60">Recent Work</p>
+              <ReelRail />
             </Reveal>
           </div>
 

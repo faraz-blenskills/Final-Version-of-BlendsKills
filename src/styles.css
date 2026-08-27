@@ -446,6 +446,14 @@
   animation: marquee-x 60s linear infinite;
 }
 
+@utility animate-reel-rail {
+  animation: logo-rail-b 38s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
