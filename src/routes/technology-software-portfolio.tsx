@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, CheckCircle2, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 
 import { Reveal } from "../components/site/Reveal";
 
@@ -24,9 +24,6 @@ export const Route = createFileRoute("/technology-software-portfolio")({
   }),
   component: TechnologySoftwarePortfolioPage,
 });
-
-const whatsappHref = (project: string) =>
-  `https://wa.me/919175789966?text=${encodeURIComponent(`Hi BlendSkills! I'd like to book a demo of ${project}.`)}`;
 
 const processSteps = [
   { n: "01", title: "Your Business", body: "Understand the problem before building the solution." },
@@ -311,22 +308,6 @@ function TechnologySoftwarePortfolioPage() {
                   role-based system we build for clients, proven on our own operations first.
                 </p>
                 <TagRow tags={workpilotCapabilities} />
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    href={whatsappHref("WorkPilot")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-hover-target inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-85"
-                  >
-                    <MessageCircle className="size-4" /> WhatsApp
-                  </a>
-                  <a
-                    href="tel:+919175789966"
-                    className="cursor-hover-target inline-flex items-center justify-center gap-2 rounded-full border border-background/20 px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-background/10"
-                  >
-                    <Phone className="size-4" /> Call
-                  </a>
-                </div>
               </div>
             </Reveal>
           </div>
