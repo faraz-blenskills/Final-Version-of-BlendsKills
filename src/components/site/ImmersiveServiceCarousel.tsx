@@ -247,17 +247,31 @@ export function ImmersiveServiceCarousel({
                         <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
                           {item.desc}
                         </p>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setOpenIndex(i);
-                          }}
-                          className="cursor-hover-target mt-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-all hover:gap-2.5 hover:opacity-90"
-                        >
-                          View more
-                          <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </button>
+                        <div className="mt-auto flex items-center justify-between gap-1.5">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setOpenIndex(i);
+                            }}
+                            className="cursor-hover-target inline-flex items-center gap-1.5 rounded-full bg-foreground px-3 py-2 text-[11px] font-medium text-background transition-all hover:opacity-90 sm:px-4 sm:text-xs"
+                          >
+                            View more
+                            <ArrowUpRight className="hidden size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:block" />
+                          </button>
+                          {item.secondaryCta && (
+                            <Link
+                              to={item.secondaryCta.to}
+                              onClick={(e) => e.stopPropagation()}
+                              className="cursor-hover-target inline-flex items-center gap-1.5 rounded-full border border-foreground/25 bg-surface px-3 py-2 text-[11px] font-medium text-foreground transition-colors hover:bg-muted sm:px-4 sm:text-xs"
+                            >
+                              <span>
+                                <span className="hidden sm:inline">Our </span>Portfolio
+                              </span>
+                              <ArrowUpRight className="hidden size-3.5 sm:block" />
+                            </Link>
+                          )}
+                        </div>
                       </>
                     )}
                   </div>
