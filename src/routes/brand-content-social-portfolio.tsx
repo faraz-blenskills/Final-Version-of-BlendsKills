@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, CheckCircle2, ChevronRight, Play, X } from "lucide-react";
 
@@ -366,6 +367,8 @@ function ReelModal({
   reel: { src: string; poster: string; full: string };
   onClose: () => void;
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     const previousOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
@@ -374,23 +377,41 @@ function ReelModal({
     };
   }, []);
 
-  return (
+  // iOS/Android can refuse `autoPlay` on a freshly mounted element. Retry
+  // explicitly; if it is still blocked the native controls remain usable.
+  useEffect(() => {
+    void videoRef.current?.play().catch(() => {});
+  }, []);
+
+  // The box gets an explicit width (the 9:16 aspect ratio then fixes the
+  // height) instead of deriving it from the video, which WebKit can resolve
+  // to zero and show sound with no picture. `isolate` + `transform-gpu` keep
+  // the video on its own layer so the rounded overflow clip can't hide it on
+  // mobile GPUs, and there is deliberately no backdrop blur behind it.
+  // Portalled to <body>: the page's scroll-reveal wrappers leave a CSS
+  // transform on their element, and a transformed ancestor turns
+  // `position: fixed` into `absolute` relative to that wrapper. Rendered in
+  // place, the player ended up inside the clipped reel section far down the
+  // page (sound playing, nothing visible on phones).
+  return createPortal(
     <div
       onClick={onClose}
-      className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/70 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-foreground/80 p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative aspect-9/16 max-h-[88vh] w-auto overflow-hidden rounded-[28px] bg-black shadow-[var(--shadow-feature)]"
+        className="relative isolate aspect-9/16 w-[min(calc(100vw-2rem),calc(88svh*0.5625))] transform-gpu overflow-hidden rounded-[28px] bg-black shadow-[var(--shadow-feature)]"
       >
         <video
+          ref={videoRef}
           key={reel.full}
           src={reel.full}
           poster={reel.poster}
           controls
           autoPlay
           playsInline
-          className="h-full max-h-[88vh] w-auto object-contain"
+          preload="auto"
+          className="absolute inset-0 size-full bg-black object-contain"
         />
         <button
           type="button"
@@ -401,7 +422,8 @@ function ReelModal({
           <X className="size-4" />
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
