@@ -304,7 +304,7 @@ function ContactPage() {
               <Reveal delay={0.08} className="grid grid-cols-2 gap-4">
                 {[
                   { value: "8+", label: "Years driving digital growth", Icon: Clock },
-                  { value: "25+", label: "Brands partnered so far", Icon: Users },
+                  { value: "50+", label: "Brands partnered so far", Icon: Users },
                 ].map(({ value, label, Icon }) => (
                   <div key={label} className="card-soft bg-foreground p-6 text-background">
                     <Icon className="size-5 text-accent" />
